@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		5104C7C6218769BD006096CC /* string_factory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = string_factory.h; sourceTree = "<group>"; };
 		519371E721861CEF00F95058 /* operators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = operators.h; sourceTree = "<group>"; };
+		51C83B3C21878427002406CC /* extra_integer_factory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = extra_integer_factory.h; sourceTree = "<group>"; };
 		51D361DB2186042000675F27 /* C++ Big Integer Library */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "C++ Big Integer Library"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51D361DE2186042000675F27 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		51D361E52186044700675F27 /* integer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = integer.h; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 			children = (
 				51D361DE2186042000675F27 /* main.cpp */,
 				51D361E52186044700675F27 /* integer.h */,
+				51C83B3C21878427002406CC /* extra_integer_factory.h */,
 				5104C7C6218769BD006096CC /* string_factory.h */,
 				519371E721861CEF00F95058 /* operators.h */,
 			);

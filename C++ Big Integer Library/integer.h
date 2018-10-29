@@ -16,7 +16,6 @@
 #include <type_traits>
 
 #include "operators.h"
-#include "string_factory.h"
 
 using namespace std;
 
@@ -105,13 +104,13 @@ public:
             sign *= -1;
         }
     }
-    bool operator ==(Integer arg) {
+    bool operator == (Integer arg) {
         return sign == arg.getSign() && value == arg.getValue();
     }
-    bool operator !=(Integer arg) {
+    bool operator != (Integer arg) {
         return !(*this == arg);
     }
-    bool operator <(Integer arg) {
+    bool operator < (Integer arg) {
         if (sign != arg.getSign()) {
             return sign < arg.getSign();
         }
@@ -129,21 +128,21 @@ public:
         }
         return false;
     }
-    bool operator <=(Integer arg) {
+    bool operator <= (Integer arg) {
         return *this == arg || *this < arg;
     }
-    bool operator >(Integer arg) {
+    bool operator > (Integer arg) {
         return !(*this <= arg);
     }
-    bool operator >=(Integer arg) {
+    bool operator >= (Integer arg) {
         return !(*this < arg);
     }
-    void operator =(Integer arg) {
+    void operator = (Integer arg) {
         sign = arg.getSign();
         value = arg.getValue();
     }
     template <class T>
-    void operator =(T arg) {
+    void operator = (T arg) {
         if (arg == 0) {
             sign = 0;
             value = "0";
@@ -155,9 +154,7 @@ public:
             value = to_string(arg);
         }
     }
-    Integer operator +(Integer addend) {
-        cout << "here " << endl;
-        cout << value << " vs " << addend.getValue() << endl;
+    Integer operator + (Integer addend) {
         string result = "0";
         int __sign = sign;
         if (this->isZero()) {
@@ -175,10 +172,10 @@ public:
         }
         return Integer(result, __sign);
     }
-    void operator +=(Integer addend) {
+    void operator += (Integer addend) {
         *this = *this + addend;
     }
-    Integer operator -(Integer subtrahend) {
+    Integer operator - (Integer subtrahend) {
         string result = "0";
         int __sign = sign;
         if (this->isZero()) {
@@ -200,7 +197,7 @@ public:
         }
         return Integer(result, __sign);
     }
-    Integer operator *(Integer multiplier) {
+    Integer operator * (Integer multiplier) {
         if (this->isZero() || multiplier.isZero()) {
             return Integer("0");
         } else {
@@ -208,10 +205,31 @@ public:
             return Integer(result, (sign == multiplier.getSign() ? +1 : -1));
         }
     }
-    void operator *=(Integer multiplier) {
+    void operator *= (Integer multiplier) {
         *this = *this * multiplier;
     }
+    Integer operator / (Integer divisor) {
+        // TODO
+        return *this;
+    }
+    void operator /= (Integer divisor) {
+        // TODO
+    }
+    Integer operator >> (int shift) {
+        // TODO
+        return *this;
+    }
+    void operator >>= (int shift) {
+        // TODO
+    }
+    Integer operator << (int shift) {
+        // TODO
+        return *this;
+    }
+    void operator <<= (int shift) {
+        // TODO
+    }
 };
-std::ostream &operator<<(std::ostream &os, Integer i) {
+std::ostream &operator << (std::ostream &os, Integer i) {
     return os << i.toString();
 }

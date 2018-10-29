@@ -14,6 +14,8 @@
 
 #include <cstring>
 
+using namespace std;
+
 int cmp(string &a, string b) {
     int la = (int)a.size();
     int lb = (int)b.size();
@@ -26,4 +28,9 @@ int cmp(string &a, string b) {
         }
     }
     return 0;
+}
+void insertTrailingZeros(string &a, int z) {
+    for (int i = 0; i < z; i ++) {
+        a += '0';
+    }
 }

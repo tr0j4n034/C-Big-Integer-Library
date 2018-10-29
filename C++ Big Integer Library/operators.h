@@ -12,6 +12,8 @@
 
 #endif /* operators_h */
 
+#include "string_factory.h"
+
 #include <cstring>
 
 using namespace std;
@@ -104,11 +106,6 @@ void normalize(string &a, string &b) { // making the lengths equal to 2's power
     }
     
 }
-void insertTrailingZeros(string &a, int z) {
-    for (int i = 0; i < z; i ++) {
-        a += '0';
-    }
-}
 string defaultMultiplier(string a, string b) {
     int aValue = stoi(a);
     int bValue = stoi(b);
@@ -141,4 +138,12 @@ string multiply(string a, string b) {
     //    you can handle negative numbers as well (even big decimals).
     //    Why not change to FFT?
     return karatsuba(a, b);
+}
+string divide(string a, string b) {
+    string result = "";
+    string current = "";
+    if (result.empty()) {
+        result = "0";
+    }
+    return result;
 }
