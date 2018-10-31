@@ -242,11 +242,18 @@ public:
         *this = *this >> shift;
     }
     Integer operator << (int shift) {
-        // TODO
-        return *this;
+        Integer I = *this;
+        while (shift > 0) {
+            I = I + I;
+            shift --;
+        }
+        return I;
     }
     void operator <<= (int shift) {
-        // TODO
+        if (isNegative()) {
+            throw runtime_error("shifting negative number.");
+        }
+        *this = *this << shift;
     }
     
     // BITWISE operators section
@@ -275,6 +282,12 @@ public:
     
     
     // EXTRA
+    bool isPositive() {
+        return sign == +1;
+    }
+    bool isNegative() {
+        return sign == -1;
+    }
     bool isEven() {
         return !value.empty() && (!((int)value.back() & 1));
     }

@@ -27,16 +27,6 @@ int main(int argc, const char * argv[]) {
 //    cout << c.getSign() << " " << c.getValue() << endl;
 //
     
-    cout << "dadsa" << (-13 >> 1) << endl;
-    
-    Integer c = -13;
-    Integer d = c >> 1;
-    c >>= 1;
-    cout << c.getSign() << " " << c.getValue() << endl;
-    cout << d.getSign() << " " << d.getValue() << endl;
-    
-    cout << (Integer(-31) >> 3) << endl;
-    //cout << (-11 >> 5) << endl;
 
     return 0;
 }
