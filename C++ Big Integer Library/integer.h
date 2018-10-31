@@ -155,10 +155,13 @@ public:
             value = to_string(arg);
         }
     }
+    Integer abs() {
+        return Integer(value, sign == -1 ? 1 : sign);
+    }
     Integer operator + (Integer addend) {
         string result = "0";
         int __sign = sign;
-        if (this->isZero()) {
+        if (isZero()) {
             result = addend.getValue();
             __sign = addend.getSign();
         } else if (addend.isZero()) {
@@ -179,7 +182,7 @@ public:
     Integer operator - (Integer subtrahend) {
         string result = "0";
         int __sign = sign;
-        if (this->isZero()) {
+        if (isZero()) {
             result = subtrahend.getValue();
             sign = -subtrahend.getSign();
         } else if (subtrahend.isZero()) {
@@ -212,7 +215,7 @@ public:
     Integer operator / (Integer divisor) {
         if (divisor.isZero()) {
             throw runtime_error("Division by zero");
-        } else if (this->isZero()) {
+        } else if (isZero()) {
             return Integer("0");
         } else {
             return Integer(divide(value, divisor.getValue()), (sign == divisor.getSign() ? +1 : -1));
@@ -223,11 +226,20 @@ public:
         *this = *this / divisor;
     }
     Integer operator >> (int shift) {
-        // TODO
-        return *this;
+        Integer I = abs();
+        bool negative = (sign == -1);
+        while (shift) {
+            if (negative && I.isOdd()) {
+                I += 1;
+            }
+            cout << I.value << endl;
+            I = I / 2;
+            shift --;
+        }
+        return I;
     }
     void operator >>= (int shift) {
-        // TODO
+        *this = *this >> shift;
     }
     Integer operator << (int shift) {
         // TODO
@@ -260,8 +272,32 @@ public:
     void operator ^= (Integer operand) {
         // TODO
     }
+    
+    
+    // EXTRA
+    bool isEven() {
+        return !value.empty() && (!((int)value.back() & 1));
+    }
+    bool isOdd() {
+        return !value.empty() && ((int)value.back() & 1);
+    }
 };
 
 std::ostream &operator << (std::ostream &os, Integer i) {
     return os << i.toString();
+}
+
+
+
+/*
+ MATH FUNCTIONS
+ ...
+ */
+
+Integer abs(Integer i) {
+    return Integer(i.getValue(), i.getSign() == -1 ? 1 : i.getSign());
+}
+Integer pow(Integer i, int exponent) {
+    // TODO
+    return i;
 }
