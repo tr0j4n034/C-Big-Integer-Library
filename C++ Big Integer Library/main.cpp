@@ -13,18 +13,21 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-//    Integer a = -5;
-//    Integer b = +15;
-//    cout << a << " " << b << endl;
-//    cout << a.getSign() << " " << a.getValue() << endl;
-//    cout << b.getSign() << " " << b.getValue() << endl;
-//    cout << a + b << endl;
-//
-//    cout << a * b << endl;
-//    cout << a * -1 << endl;
-//    cout << b << endl;
+    Integer a = -5;
+    Integer b = +16;
+    cout << a << " " << b << endl;
+    cout << a.getSign() << " " << a.getValue() << endl;
+    cout << b.getSign() << " " << b.getValue() << endl;
+    cout << a / b << endl;
+    cout << b / a << endl;
     
-    cout << (-11 >> 5) << endl;
+    Integer c = a / b;
+    cout << a.getSign() << " " << a.getValue() << endl;
+    cout << b.getSign() << " " << b.getValue() << endl;
+    cout << c.getSign() << " " << c.getValue() << endl;
+    
+    
+    //cout << (-11 >> 5) << endl;
 
     return 0;
 }

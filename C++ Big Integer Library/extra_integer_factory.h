@@ -11,3 +11,7 @@
 
 
 #endif /* extra_integer_factory_h */
+
+using namespace std;
+
+

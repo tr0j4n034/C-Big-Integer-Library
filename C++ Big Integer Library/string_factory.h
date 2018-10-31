@@ -16,6 +16,8 @@
 
 using namespace std;
 
+const int SHORT_INT_RANGE = 1 << 27; // for faster division operations
+
 int cmp(string &a, string b) {
     int la = (int)a.size();
     int lb = (int)b.size();

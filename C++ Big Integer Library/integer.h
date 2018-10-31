@@ -16,6 +16,7 @@
 #include <type_traits>
 
 #include "operators.h"
+#include "extra_integer_factory.h"
 
 using namespace std;
 
@@ -97,7 +98,7 @@ public:
         }
     }
     bool isZero() {
-        return !value.empty() && value[0] == '0';
+        return (!value.empty() && value[0] == '0') || sign == 0;
     }
     void negate() {
         if (!this->isZero()) {
@@ -202,18 +203,24 @@ public:
             return Integer("0");
         } else {
             string result = multiply(value, multiplier.getValue());
-            return Integer(result, (sign == multiplier.getSign() ? +1 : -1));
+            return Integer(result, (multiplier.getSign() ? +1 : -1));
         }
     }
     void operator *= (Integer multiplier) {
         *this = *this * multiplier;
     }
     Integer operator / (Integer divisor) {
-        // TODO
+        if (divisor.isZero()) {
+            throw runtime_error("Division by zero");
+        } else if (this->isZero()) {
+            return Integer("0");
+        } else {
+            return Integer(divide(value, divisor.getValue()), (sign == divisor.getSign() ? +1 : -1));
+        }
         return *this;
     }
     void operator /= (Integer divisor) {
-        // TODO
+        *this = *this / divisor;
     }
     Integer operator >> (int shift) {
         // TODO
@@ -229,7 +236,32 @@ public:
     void operator <<= (int shift) {
         // TODO
     }
+    
+    // BITWISE operators section
+    
+    Integer operator & (Integer operand) {
+        // TODO
+        return *this;
+    }
+    void operator &= (Integer operand) {
+        // TODO
+    }
+    Integer operator | (Integer operand) {
+        // TODO
+        return *this;
+    }
+    void operator |= (Integer operand) {
+        // TODO
+    }
+    Integer operator ^ (Integer operand) {
+        // TODO
+        return *this;
+    }
+    void operator ^= (Integer operand) {
+        // TODO
+    }
 };
+
 std::ostream &operator << (std::ostream &os, Integer i) {
     return os << i.toString();
 }

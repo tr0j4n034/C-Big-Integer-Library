@@ -139,11 +139,81 @@ string multiply(string a, string b) {
     //    Why not change to FFT?
     return karatsuba(a, b);
 }
-string divide(string a, string b) {
+string _divide(string a, string b) {
     string result = "";
     string current = "";
+    for (char ch: a) {
+        current += ch;
+        if (cmp(current, b) != -1) {
+            int wheel = 0;
+            while (cmp(current, b) != -1) {
+                wheel ++;
+                current = subtract(current, b);
+            }
+            result += (char)(wheel + '0');
+        }
+    }
     if (result.empty()) {
         result = "0";
     }
     return result;
+}
+string divideFast(string a, int b) {
+    string result = "";
+    int current = 0;
+    for (char ch: a) {
+        current = (current << 1) + (current << 3) + ch - '0';
+        if (current >= b) {
+            result += (char)(current / b + '0');
+            current %= b;
+        }
+    }
+    if (result.empty()) {
+        result = "0";
+    }
+    return result;
+}
+string _modulo(string a, string b) {
+    string result = "";
+    string current = "";
+    for (char ch: a) {
+        current += ch;
+        if (cmp(current, b) != -1) {
+            int wheel = 0;
+            while (cmp(current, b) != -1) {
+                wheel ++;
+                current = subtract(current, b);
+            }
+            result += (char)(wheel + '0');
+        }
+    }
+    return current;
+}
+string moduloFast(string a, int b) {
+    string result = "";
+    int current = 0;
+    for (char ch: a) {
+        current = (current << 1) + (current << 3) + ch - '0';
+        if (current >= b) {
+            result += (char)(current / b + '0');
+            current %= b;
+        }
+    }
+    return to_string(current);
+}
+string divide(string a, string b) {
+    int bValue = stoi(b);
+    if (bValue <= SHORT_INT_RANGE) {
+        return divideFast(a, bValue);
+    } else {
+        return _divide(a, b);
+    }
+}
+string modulo(string a, string b) {
+    int bValue = stoi(b);
+    if (bValue <= SHORT_INT_RANGE) {
+        return moduloFast(a, bValue);
+    } else {
+        return _modulo(a, b);
+    }
 }
