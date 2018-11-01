@@ -31,6 +31,8 @@ int main(int argc, const char * argv[]) {
     cout << toBinary(a) << endl;
     Integer b = 1;
     cout << ((b >> 1) > 0) << endl;
+    
+    cout << !(1) << endl;
 
     return 0;
 }

@@ -97,9 +97,6 @@ public:
             return -1;
         }
     }
-    bool isZero() {
-        return (!value.empty() && value[0] == '0') || sign == 0;
-    }
     void negate() {
         if (!this->isZero()) {
             sign *= -1;
@@ -175,7 +172,7 @@ public:
             __sign *= -1;
             result = subtract(addend.getValue(), value);
         }
-        return Integer(result, __sign);
+        return Integer(result, result[0] == '0' ? 0 : __sign);
     }
     void operator += (Integer addend) {
         *this = *this + addend;
@@ -200,7 +197,7 @@ public:
         } else {
             result = add(value, subtrahend.getValue());
         }
-        return Integer(result, __sign);
+        return Integer(result, result[0] == '0' ? 0 : __sign);
     }
     Integer operator * (Integer multiplier) {
         if (this->isZero() || multiplier.isZero()) {
@@ -259,6 +256,9 @@ public:
     
     // BITWISE operators section
     
+    Integer operator !() {
+        return Integer(isZero() ? 1 : 0);
+    }
     Integer operator & (Integer operand) {
         // TODO
         return *this;
@@ -282,7 +282,9 @@ public:
     }
     
     
-    // EXTRA
+    bool isZero() {
+        return (!value.empty() && value[0] == '0') || sign == 0;
+    }
     bool isPositive() {
         return sign == +1;
     }
