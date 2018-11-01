@@ -9,30 +9,13 @@
 #include <iostream>
 
 #include "integer.h"
+#include "extra_integer_factory.h"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-//    Integer a = -5;
-//    Integer b = +16;
-//    cout << a << " " << b << endl;
-//    cout << a.getSign() << " " << a.getValue() << endl;
-//    cout << b.getSign() << " " << b.getValue() << endl;
-//    cout << a / b << endl;
-//    cout << b / a << endl;
-//
-//    Integer c = a / b;
-//    cout << a.getSign() << " " << a.getValue() << endl;
-//    cout << b.getSign() << " " << b.getValue() << endl;
-//    cout << c.getSign() << " " << c.getValue() << endl;
-//
-    
-    Integer a = 13;
-    cout << toBinary(a) << endl;
-    Integer b = 1;
-    cout << ((b >> 1) > 0) << endl;
-    
-    cout << !(1) << endl;
-
+    //cout << sqrtI(Integer(81)) << endl;
+    cout << Integer("10") * Integer("10") << endl;
+    cout << (Integer(100) <= Integer(12)) << endl;
     return 0;
 }

@@ -14,4 +14,35 @@
 
 using namespace std;
 
-
+Integer absI(Integer I) {
+    return Integer(I.getValue(), I.getSign() == -1 ? 1 : I.getSign());
+}
+Integer powI(Integer I, int exponent) {
+    Integer result = I;
+    while (exponent > 1) {
+        result = result * I;
+        exponent --;
+    }
+    return result;
+}
+Integer sqrtI(Integer I) {
+    if (I < 0) {
+        // may be changed to silent warning
+        throw runtime_error("negative number fed into sqrt function");
+    }
+    // TODO
+    // newton-raphson or binary search will be implemented
+    
+    Integer low = 0, high = Integer(I), middle, best_approximation = Integer(I);
+    while (low <= high) {
+        cout << low << " " << high << endl;
+        middle = (low + high) >> 1;
+        if (middle * middle <= I) {
+            best_approximation = Integer(middle);
+            low = middle + 1;
+        } else {
+            high = middle - 1;
+        }
+    }
+    return best_approximation;
+}

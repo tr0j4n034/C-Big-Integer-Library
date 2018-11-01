@@ -16,7 +16,10 @@
 
 using namespace std;
 
-const int SHORT_INT_RANGE = 1 << 27; // for faster division operations
+const int SHORT_INT_RANGE = 1 << 27;
+// for faster multiplication & division operations
+// the value is chosen that 9 * this < 2^31
+// It can be changed due to specific use
 
 int cmp(string &a, string b) {
     int la = (int)a.size();

@@ -17,7 +17,6 @@
 #include <type_traits>
 
 #include "operators.h"
-#include "extra_integer_factory.h"
 
 using namespace std;
 
@@ -109,7 +108,6 @@ public:
         return !(*this == arg);
     }
     bool operator < (Integer arg) {
-        if (arg.isZero())
         if (sign != arg.getSign()) {
             return sign < arg.getSign();
         }
@@ -309,17 +307,6 @@ std::ostream &operator << (std::ostream &os, Integer i) {
  ...
  */
 
-Integer abs(Integer I) {
-    return Integer(I.getValue(), I.getSign() == -1 ? 1 : I.getSign());
-}
-Integer pow(Integer I, int exponent) {
-    Integer result = I;
-    while (exponent > 0) {
-        result = result * I;
-        exponent --;
-    }
-    return result;
-}
 string toBinary(Integer I) {
     string bin = "";
     Integer absolute = I.abs();
