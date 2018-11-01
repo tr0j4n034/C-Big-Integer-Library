@@ -15,7 +15,9 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     //cout << sqrtI(Integer(81)) << endl;
+    cout << (Integer(20) >> 1) << endl;
     cout << Integer("10") * Integer("10") << endl;
-    cout << (Integer(100) <= Integer(12)) << endl;
+    cout << sqrtI(Integer(81)) << endl;
+    
     return 0;
 }

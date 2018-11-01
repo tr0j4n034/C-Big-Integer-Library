@@ -144,7 +144,7 @@ string _divide(string a, string b) {
     string current = "";
     for (char ch: a) {
         current += ch;
-        if (cmp(current, b) != -1) {
+        if (!result.empty() || cmp(current, b) != -1) {
             int wheel = 0;
             while (cmp(current, b) != -1) {
                 wheel ++;
@@ -163,7 +163,7 @@ string divideFast(string a, int b) {
     int current = 0;
     for (char ch: a) {
         current = (current << 1) + (current << 3) + ch - '0';
-        if (current >= b) {
+        if (!result.empty() || current >= b) {
             result += (char)(current / b + '0');
             current %= b;
         }

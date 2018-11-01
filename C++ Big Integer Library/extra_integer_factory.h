@@ -33,10 +33,12 @@ Integer sqrtI(Integer I) {
     // TODO
     // newton-raphson or binary search will be implemented
     
-    Integer low = 0, high = Integer(I), middle, best_approximation = Integer(I);
+    Integer low = 0, high = powI(10, ((int)I.decimalValueLength() >> 1) + 1);
+    Integer middle, best_approximation = Integer(I);
     while (low <= high) {
-        cout << low << " " << high << endl;
         middle = (low + high) >> 1;
+        cout << low << " " << high << " " << middle << " " << middle * middle << endl;
+        
         if (middle * middle <= I) {
             best_approximation = Integer(middle);
             low = middle + 1;

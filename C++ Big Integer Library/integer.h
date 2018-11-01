@@ -295,6 +295,9 @@ public:
     bool isOdd() {
         return !value.empty() && ((int)value.back() & 1);
     }
+    int decimalValueLength() {
+        return (int)value.size();
+    }
 };
 
 std::ostream &operator << (std::ostream &os, Integer i) {
