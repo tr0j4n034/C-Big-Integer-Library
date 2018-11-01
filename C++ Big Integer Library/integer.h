@@ -13,6 +13,7 @@
 #endif /* Number_h */
 
 #include <cstring>
+#include <algorithm>
 #include <type_traits>
 
 #include "operators.h"
@@ -44,7 +45,7 @@ public:
         value = arg;
         sign = __sign;
     }
-    template<typename T, // for real values
+    template<typename T, // for integer values
     typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
     Integer(T arg) {
         if (arg == 0) {
@@ -70,9 +71,8 @@ public:
             value = to_string(arg);
         }
     }
-
     ~Integer() {
-        
+        // TODO
     }
     string toString(){
         if (this -> isZero()) {
@@ -106,12 +106,13 @@ public:
         }
     }
     bool operator == (Integer arg) {
-        return sign == arg.getSign() && value == arg.getValue();
+        return (sign == arg.getSign() || isZero()) && value == arg.getValue();
     }
     bool operator != (Integer arg) {
         return !(*this == arg);
     }
     bool operator < (Integer arg) {
+        if (arg.isZero())
         if (sign != arg.getSign()) {
             return sign < arg.getSign();
         }
@@ -232,7 +233,6 @@ public:
             if (negative && I.isOdd()) {
                 I += 1;
             }
-            cout << I.value << endl;
             I = I / 2;
             shift --;
         }
@@ -251,6 +251,7 @@ public:
     }
     void operator <<= (int shift) {
         if (isNegative()) {
+            // maybe changed to a silent warning
             throw runtime_error("shifting negative number.");
         }
         *this = *this << shift;
@@ -301,16 +302,47 @@ std::ostream &operator << (std::ostream &os, Integer i) {
 }
 
 
-
 /*
  MATH FUNCTIONS
  ...
  */
 
-Integer abs(Integer i) {
-    return Integer(i.getValue(), i.getSign() == -1 ? 1 : i.getSign());
+Integer abs(Integer I) {
+    return Integer(I.getValue(), I.getSign() == -1 ? 1 : I.getSign());
 }
-Integer pow(Integer i, int exponent) {
-    // TODO
-    return i;
+Integer pow(Integer I, int exponent) {
+    Integer result = I;
+    while (exponent > 0) {
+        result = result * I;
+        exponent --;
+    }
+    return result;
+}
+string toBinary(Integer I) {
+    string bin = "";
+    Integer absolute = I.abs();
+    while (absolute > 0) {
+        cout << absolute << endl;
+        bin += (absolute.isOdd() ? '1' : '0');
+        absolute >>= 1;
+    }
+    if (I.isNegative()) {
+        // handle negative numbers if needed
+    }
+    reverse(bin.begin(), bin.end());
+    return bin;
+}
+Integer binaryToInteger(string binary) {
+    Integer result = 0;
+    Integer power = 1;
+    for (int i = (int)binary.size() - 1; i >= 0; i --) {
+        if (binary[i] == '1') {
+            result += power;
+        } else if (binary[i] != '0'){
+            // maybe changed to a warning
+            throw runtime_error("not a binary string is fed");
+        }
+        power <<= 1;
+    }
+    return result;
 }

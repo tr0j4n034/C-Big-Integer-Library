@@ -27,6 +27,10 @@ int main(int argc, const char * argv[]) {
 //    cout << c.getSign() << " " << c.getValue() << endl;
 //
     
+    Integer a = 13;
+    cout << toBinary(a) << endl;
+    Integer b = 1;
+    cout << ((b >> 1) > 0) << endl;
 
     return 0;
 }
