@@ -14,10 +14,9 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    //cout << sqrtI(Integer(81)) << endl;
-    cout << (Integer(20) >> 1) << endl;
-    cout << Integer("10") * Integer("10") << endl;
-    cout << sqrtI(Integer(81)) << endl;
+    Integer a = 4;
+    cout << powI(a, 5) << endl;
+    cout << powFastI(a, 5) << endl;
     
     return 0;
 }

@@ -25,21 +25,55 @@ Integer powI(Integer I, int exponent) {
     }
     return result;
 }
+Integer powFastI(Integer I, int exponent) {
+    Integer result = 1, p = Integer(I);
+    while (exponent > 0) {
+        if (exponent & 1) {
+            result *= p;
+        }
+        exponent >>= 1;
+        p = p * p;
+    }
+    return result;
+}
 Integer sqrtI(Integer I) {
     if (I < 0) {
         // may be changed to silent warning
         throw runtime_error("negative number fed into sqrt function");
     }
-    // TODO
-    // newton-raphson or binary search will be implemented
+    // Newton-raphson method can be implemented
+    // in place of the following binary search approach.
     
-    Integer low = 0, high = powI(10, ((int)I.decimalValueLength() >> 1) + 1);
+    Integer low = 0, high = powI(10, ((int)I.decimalValueLength() + 1) >> 1);
     Integer middle, best_approximation = Integer(I);
+    // the above boundary can be further relaxed
+    
     while (low <= high) {
         middle = (low + high) >> 1;
-        cout << low << " " << high << " " << middle << " " << middle * middle << endl;
-        
         if (middle * middle <= I) {
+            best_approximation = Integer(middle);
+            low = middle + 1;
+        } else {
+            high = middle - 1;
+        }
+    }
+    return best_approximation;
+}
+Integer cbrtI(Integer I) {
+    if (I < 0) {
+        // may be changed to silent warning
+        throw runtime_error("negative number fed into sqrt function");
+    }
+    // Newton-raphson method can be implemented
+    // in place of the following binary search approach.
+    
+    Integer low = 0, high = powI(10, ((int)I.decimalValueLength() + 2) / 3);
+    Integer middle, best_approximation = Integer(I);
+    // the above boundary can be further relaxed
+    
+    while (low <= high) {
+        middle = (low + high) >> 1;
+        if (middle * middle * middle <= I) {
             best_approximation = Integer(middle);
             low = middle + 1;
         } else {
