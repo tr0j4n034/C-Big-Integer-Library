@@ -256,32 +256,62 @@ public:
     }
     
     // BITWISE operators section
+    // Please, modify if negative numbers will be used in these operations
     
     Integer operator !() {
         return Integer(isZero() ? 1 : 0);
     }
     Integer operator & (Integer operand) {
-        // TODO
-        return *this;
+        Integer a = Integer(*this);
+        Integer b = Integer(operand);
+        Integer result = 0, power = 1;
+        while (a > 0 && b > 0) {
+            if (a.isOdd() && b.isOdd()) {
+                result += power;
+            }
+            a >>= 1;
+            b >>= 1;
+            power <<= 1;
+        }
+        return result;
     }
     void operator &= (Integer operand) {
-        // TODO
+        *this = *this & operand;
     }
     Integer operator | (Integer operand) {
-        // TODO
-        return *this;
+        Integer a = Integer(*this);
+        Integer b = Integer(operand);
+        Integer result = 0, power = 1;
+        while (a > 0 || b > 0) {
+            if (a.isOdd() || b.isOdd()) {
+                result += power;
+            }
+            a >>= 1;
+            b >>= 1;
+            power <<= 1;
+        }
+        return result;
     }
     void operator |= (Integer operand) {
-        // TODO
+        *this = *this | operand;
     }
     Integer operator ^ (Integer operand) {
-        // TODO
-        return *this;
+        Integer a = Integer(*this);
+        Integer b = Integer(operand);
+        Integer result = 0, power = 1;
+        while (a > 0 || b > 0) {
+            if (a.isOdd() != b.isOdd()) {
+                result += power;
+            }
+            a >>= 1;
+            b >>= 1;
+            power <<= 1;
+        }
+        return result;
     }
     void operator ^= (Integer operand) {
-        // TODO
+        *this = *this ^ operand;
     }
-    
     
     bool isZero() {
         return (!value.empty() && value[0] == '0') || sign == 0;

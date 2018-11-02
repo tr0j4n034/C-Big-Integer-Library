@@ -14,13 +14,11 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    Integer a = 44;
-    cout << powI(a, 5) << endl;
-    cout << powFastI(a, 5) << endl;
-    
-    Integer b = 10;
-    cout << a / b << endl;
-    cout << -a / b << endl;
+    Integer a = 10; // 1010
+    Integer b = 13; // 1101
+    cout << (a & b) << endl;
+    cout << (a | b) << endl;
+    cout << (a ^ b) << endl;
     
     return 0;
 }
