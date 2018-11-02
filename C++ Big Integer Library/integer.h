@@ -200,6 +200,9 @@ public:
         }
         return Integer(result, result[0] == '0' ? 0 : __sign);
     }
+    void operator -= (Integer subtrahend) {
+        *this = *this - subtrahend;
+    }
     Integer operator * (Integer multiplier) {
         if (this->isZero() || multiplier.isZero()) {
             return Integer("0");
@@ -237,6 +240,23 @@ public:
     void operator %= (Integer divisor) {
         *this = *this % divisor;
     }
+    Integer operator ++ () {
+        *this += 1;
+        return *this;
+    }
+    Integer operator ++ (int) {
+        *this += 1;
+        return *this;
+    }
+    Integer operator -- () {
+        *this -= 1;
+        return *this;
+    }
+    Integer operator -- (int) {
+        *this += 1;
+        return *this;
+    }
+    
     Integer operator >> (int shift) {
         Integer I = abs();
         bool negative = (sign == -1);

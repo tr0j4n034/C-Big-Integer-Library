@@ -20,6 +20,9 @@ int main(int argc, const char * argv[]) {
     cout << a % b << endl;
     cout << gcd(a, b) << endl;
     cout << lcm(a, b) << endl;
+    a ++;
+    cout << a << endl;
+    cout << ++b << endl;
     
     return 0;
 }
