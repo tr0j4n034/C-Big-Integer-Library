@@ -235,7 +235,7 @@ public:
         return *this;
     }
     void operator %= (Integer divisor) {
-        *this = *this / divisor;
+        *this = *this % divisor;
     }
     Integer operator >> (int shift) {
         Integer I = abs();

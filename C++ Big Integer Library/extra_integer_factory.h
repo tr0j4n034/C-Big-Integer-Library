@@ -82,3 +82,18 @@ Integer cbrtI(Integer I) {
     }
     return best_approximation;
 }
+Integer gcd(Integer a, Integer b) {
+    Integer posA = a.abs();
+    Integer posB = b.abs();
+    while (posA > 0) {
+        posA %= posB;
+        if (posA == 0) {
+            return posB;
+        }
+        posB %= posA;
+    }
+    return posA;
+}
+Integer lcm(Integer a, Integer b) {
+    return Integer(a / gcd(a, b) * b);
+}

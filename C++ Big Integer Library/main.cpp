@@ -10,17 +10,16 @@
 
 #include "integer.h"
 #include "extra_integer_factory.h"
+#include "prime_factory.h"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    Integer a = 10; // 1010
-    Integer b = 13; // 1101
-    cout << (a & b) << endl;
-    cout << (a | b) << endl;
-    cout << (a ^ b) << endl;
+    Integer a = 42;
+    Integer b = 24;
     cout << a % b << endl;
-    cout << b % a << endl;
+    cout << gcd(a, b) << endl;
+    cout << lcm(a, b) << endl;
     
     return 0;
 }
