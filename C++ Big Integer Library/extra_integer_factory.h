@@ -131,3 +131,15 @@ int isFactorialI(Integer I) {
     // The early bird catches the worm.
     return -1;
 }
+Integer* factorialTable(int number) {
+    if (number < 0 || number > (1 << 16)) {
+        // change if needed
+        throw runtime_error("not valid for computation");
+    }
+    Integer* table = new Integer[number + 1];
+    table[0] = 1;
+    for (int i = 1; i <= number; i ++) {
+        table[i] = table[i - 1] * i;
+    }
+    return table;
+}

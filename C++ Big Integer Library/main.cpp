@@ -20,5 +20,6 @@ int main(int argc, const char * argv[]) {
     cout << r.generate() << endl;
     cout << r.generateI(10) << endl;
     
+    
     return 0;
 }
