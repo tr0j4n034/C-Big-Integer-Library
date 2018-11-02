@@ -11,15 +11,14 @@
 #include "integer.h"
 #include "extra_integer_factory.h"
 #include "prime_factory.h"
+#include "random_factory.h"
 
 using namespace std;
 
-int main(int argc, const char * argv[]) {
-    
-    Integer a = factorialI(15);
-    cout << a << endl;
-    cout << isFactorialI(a) << endl;
-    cout << isFactorialI(a ++) << endl;
+int main(int argc, const char * argv[]) {    
+    Random r(10);
+    cout << r.generate() << endl;
+    cout << r.generateI(10) << endl;
     
     return 0;
 }

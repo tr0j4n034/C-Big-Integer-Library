@@ -14,14 +14,12 @@
 
 #include <cstring>
 
-using namespace std;
-
 const int SHORT_INT_RANGE = 1 << 27;
 // for faster multiplication & division operations
 // the value is chosen that 9 * this < 2^31
 // It can be changed due to specific use
 
-int cmp(string &a, string b) {
+int cmp(std::string &a, std::string b) {
     int la = (int)a.size();
     int lb = (int)b.size();
     if (la != lb) {
@@ -34,7 +32,7 @@ int cmp(string &a, string b) {
     }
     return 0;
 }
-void insertTrailingZeros(string &a, int z) {
+void insertTrailingZeros(std::string &a, int z) {
     for (int i = 0; i < z; i ++) {
         a += '0';
     }

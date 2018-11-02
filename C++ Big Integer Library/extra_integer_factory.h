@@ -12,8 +12,6 @@
 
 #endif /* extra_integer_factory_h */
 
-using namespace std;
-
 Integer absI(Integer I) {
     return Integer(I.getValue(), I.getSign() == -1 ? 1 : I.getSign());
 }
@@ -33,6 +31,17 @@ Integer powFastI(Integer I, int exponent) {
         }
         exponent >>= 1;
         p = p * p;
+    }
+    return result;
+}
+Integer modPowerI(Integer I, int exponent, Integer modulo) {
+    Integer result = 1, p = Integer(I) % modulo;
+    while (exponent > 0) {
+        if (exponent & 1) {
+            result = result * p % modulo;
+        }
+        exponent >>= 1;
+        p = (p * p) % modulo;
     }
     return result;
 }

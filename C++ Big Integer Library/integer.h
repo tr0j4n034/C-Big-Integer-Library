@@ -18,7 +18,6 @@
 
 #include "operators.h"
 
-using namespace std;
 
 class Integer {
     int sign;
@@ -258,7 +257,6 @@ public:
         -- (*this);
         return result;
     }
-    
     Integer operator >> (int shift) {
         Integer I = abs();
         bool negative = (sign == -1);
