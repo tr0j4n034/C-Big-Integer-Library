@@ -224,6 +224,19 @@ public:
     void operator /= (Integer divisor) {
         *this = *this / divisor;
     }
+    Integer operator % (Integer divisor) {
+        if (divisor.isZero()) {
+            throw runtime_error("Division by zero");
+        } else if (isZero()) {
+            return Integer("0");
+        } else {
+            return Integer(modulo(value, divisor.getValue()), (sign == divisor.getSign() ? +1 : -1));
+        }
+        return *this;
+    }
+    void operator %= (Integer divisor) {
+        *this = *this / divisor;
+    }
     Integer operator >> (int shift) {
         Integer I = abs();
         bool negative = (sign == -1);

@@ -19,6 +19,8 @@ int main(int argc, const char * argv[]) {
     cout << (a & b) << endl;
     cout << (a | b) << endl;
     cout << (a ^ b) << endl;
+    cout << a % b << endl;
+    cout << b % a << endl;
     
     return 0;
 }
