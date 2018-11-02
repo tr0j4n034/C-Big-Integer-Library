@@ -151,6 +151,9 @@ public:
             value = to_string(arg);
         }
     }
+    Integer operator -() {
+        return Integer(value, sign == -1 ? +1 : sign);
+    }
     Integer abs() {
         return Integer(value, sign == -1 ? 1 : sign);
     }
@@ -303,12 +306,6 @@ public:
 std::ostream &operator << (std::ostream &os, Integer i) {
     return os << i.toString();
 }
-
-
-/*
- MATH FUNCTIONS
- ...
- */
 
 string toBinary(Integer I) {
     string bin = "";
