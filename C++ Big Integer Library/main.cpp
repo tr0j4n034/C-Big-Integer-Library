@@ -15,14 +15,11 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    Integer a = 42;
-    Integer b = 24;
-    cout << a % b << endl;
-    cout << gcd(a, b) << endl;
-    cout << lcm(a, b) << endl;
-    a ++;
+    
+    Integer a = factorialI(15);
     cout << a << endl;
-    cout << ++b << endl;
+    cout << isFactorialI(a) << endl;
+    cout << isFactorialI(a ++) << endl;
     
     return 0;
 }

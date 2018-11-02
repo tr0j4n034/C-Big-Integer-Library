@@ -240,21 +240,23 @@ public:
     void operator %= (Integer divisor) {
         *this = *this % divisor;
     }
-    Integer operator ++ () {
+    Integer& operator ++ () {
         *this += 1;
         return *this;
     }
     Integer operator ++ (int) {
-        *this += 1;
-        return *this;
+        Integer result = Integer(*this);
+        ++ (*this);
+        return result;
     }
     Integer operator -- () {
         *this -= 1;
         return *this;
     }
     Integer operator -- (int) {
-        *this += 1;
-        return *this;
+        Integer result = Integer(*this);
+        -- (*this);
+        return result;
     }
     
     Integer operator >> (int shift) {

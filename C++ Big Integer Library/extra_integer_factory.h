@@ -82,7 +82,7 @@ Integer cbrtI(Integer I) {
     }
     return best_approximation;
 }
-Integer gcd(Integer a, Integer b) {
+Integer gcdI(Integer a, Integer b) {
     Integer posA = a.abs();
     Integer posB = b.abs();
     while (posA > 0) {
@@ -94,6 +94,31 @@ Integer gcd(Integer a, Integer b) {
     }
     return posA;
 }
-Integer lcm(Integer a, Integer b) {
-    return Integer(a / gcd(a, b) * b);
+Integer lcmI(Integer a, Integer b) {
+    return Integer(a / gcdI(a, b) * b);
+}
+Integer factorialI(int number) {
+    if (number < 0) {
+        return 0;
+    }
+    Integer result = 1;
+    for (int i = 2; i <= number; i ++) {
+        result *= i;
+    }
+    return result;
+}
+int isFactorialI(Integer I) {
+    if (I < 1) {
+        return -1;
+    } else {
+        for (int i = 2; ; i ++) {
+            if (I == 1) {
+                return i - 1;
+            } else if (I % i > 0) {
+                return -1;
+            } I /= i;
+        }
+    }
+    // The early bird catches the worm.
+    return -1;
 }
