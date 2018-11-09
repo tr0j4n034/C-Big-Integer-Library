@@ -33,6 +33,9 @@ public:
     int generate() {
         return dist(generator);
     }
+    int generate(int low, int high) {
+        return low + dist(generator) % (high - low + 1);
+    }
     Integer generateI(int length = DEFAULT_INTEGER_LENGTH) {
         string digits = "";
         for (int i = 0; i < length; i ++) {
@@ -44,5 +47,23 @@ public:
             digits += char(__d + '0');
         }
         return Integer(digits, (generate() & 1) ? +1 : -1);
+    }
+    Integer generateIUpTo(Integer top) {
+        string result = "";
+        for (int i = 0; i < (int)top.getValue().size(); i ++) {
+            int __d = generate(0, 9);
+            if (__d > 0 || !result.empty()) {
+                result += (char)(__d + '0');
+            } if (cmp(result, top.getValue()) == +1) {
+                result.pop_back();
+            }
+        }
+        if (result.empty()) {
+            result = "0";
+        }
+        return result;
+    }
+    Integer generateI(Integer low, Integer high) {
+        return low + generateIUpTo(high - low + 1);
     }
 };

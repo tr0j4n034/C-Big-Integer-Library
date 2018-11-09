@@ -19,7 +19,8 @@ int main(int argc, const char * argv[]) {
     Random r(10);
     cout << r.generate() << endl;
     cout << r.generateI(10) << endl;
-    
+    cout << r.generateI(1239218939, 891239123938921) << endl;
+    cout << r.generateIUpTo(1000) << endl;
     
     return 0;
 }
