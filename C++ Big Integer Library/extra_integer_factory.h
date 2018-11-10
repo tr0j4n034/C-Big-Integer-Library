@@ -45,6 +45,17 @@ Integer modPowerI(Integer I, int exponent, Integer modulo) {
     }
     return result;
 }
+Integer modPowerI(Integer I, Integer exponent, Integer modulo) {
+    Integer result = 1, p = Integer(I) % modulo;
+    while (exponent > 0) {
+        if (exponent.isOdd()) {
+            result = result * p % modulo;
+        }
+        exponent >>= 1;
+        p = (p * p) % modulo;
+    }
+    return result;
+}
 Integer sqrtI(Integer I) {
     if (I < 0) {
         // may be changed to silent warning
