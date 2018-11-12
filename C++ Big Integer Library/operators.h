@@ -109,10 +109,10 @@ void normalize(string &a, string &b) { // making the lengths equal to 2's power
 string defaultMultiplier(string a, string b) {
     int aValue = stoi(a);
     int bValue = stoi(b);
-    return to_string(aValue * bValue);
+    return to_string(1LL * aValue * bValue);
 }
 string karatsuba(string a, string b) {
-    if ((int)a.size() < 3) { // if small string lengths achieved, use integer multiplication
+    if ((int)a.size() < 4 && (int)b.size() < 4) { // if small string lengths achieved, use integer multiplication
         return defaultMultiplier(a, b);
     }
     //    if (isZero(a) || isZero(b)) {
