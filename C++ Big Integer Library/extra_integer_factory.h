@@ -15,11 +15,28 @@
 Integer absI(Integer I) {
     return Integer(I.getValue(), I.getSign() == -1 ? 1 : I.getSign());
 }
+Integer min(Integer a, Integer b) {
+    return a < b ? a : b;
+}
+Integer max(Integer a, Integer b) {
+    return a > b ? a : b;
+}
 Integer powI(Integer I, int exponent) {
     Integer result = I;
     while (exponent > 1) {
         result = result * I;
         exponent --;
+    }
+    return result;
+}
+Integer powFastI(Integer I, Integer exponent) {
+    Integer result = 1, p = Integer(I);
+    while (exponent > 0) {
+        if (exponent.isOdd()) {
+            result *= p;
+        }
+        exponent >>= 1;
+        p = p * p;
     }
     return result;
 }
@@ -34,6 +51,10 @@ Integer powFastI(Integer I, int exponent) {
     }
     return result;
 }
+Integer powFast(int i, int exponent) {
+    return powFastI(Integer(i), exponent);
+}
+
 Integer modPowerI(Integer I, int exponent, Integer modulo) {
     Integer result = 1, p = Integer(I) % modulo;
     while (exponent > 0) {
