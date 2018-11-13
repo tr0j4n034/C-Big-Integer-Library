@@ -18,12 +18,14 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     Random r(5);
     cout << r.generate(1, 10) << endl;
+    cout << generatePrime() << endl;
     
     for (int i = 2; i < 50; i ++) {
         int a;
         cin >> a;
         cout << isPrime(a) << endl;
     }
+    
     
     
     return 0;

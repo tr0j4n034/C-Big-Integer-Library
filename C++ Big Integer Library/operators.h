@@ -106,12 +106,12 @@ void normalize(string &a, string &b) { // making the lengths equal to 2's power
     }
     
 }
-string defaultMultiplier(string a, string b) {
+string defaultMultiplier(string &a, string &b) {
     int aValue = stoi(a);
     int bValue = stoi(b);
     return to_string(1LL * aValue * bValue);
 }
-string karatsuba(string a, string b) {
+string karatsuba(string &a, string &b) {
     if ((int)a.size() < 4 && (int)b.size() < 4) { // if small string lengths achieved, use integer multiplication
         return defaultMultiplier(a, b);
     }
@@ -128,10 +128,12 @@ string karatsuba(string a, string b) {
     string aSum = add(leftA, rightA);
     string bSum = add(leftB, rightB);
     string p3 = karatsuba(aSum, bSum);
-    string p4 = subtract(subtract(p3, p1), p2);
+    string delta31 = subtract(p3, p1);
+    string p4 = subtract(delta31, p2);
     insertTrailingZeros(p1, (int)a.size());
     insertTrailingZeros(p4, (int)a.size() >> 1);
-    return add(p1, add(p2, p4));
+    string sum24 = add(p2, p4);
+    return add(p1, sum24);
 }
 string multiply(string a, string b) {
     //    considering that this code assumes only positive numbers,

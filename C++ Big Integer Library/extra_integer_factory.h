@@ -55,7 +55,7 @@ Integer powFast(int i, int exponent) {
     return powFastI(Integer(i), exponent);
 }
 
-Integer modPowerI(Integer I, int exponent, Integer modulo) {
+Integer modPowerI(Integer I, int exponent, Integer &modulo) {
     Integer result = 1, p = Integer(I) % modulo;
     while (exponent > 0) {
         if (exponent & 1) {
@@ -66,7 +66,7 @@ Integer modPowerI(Integer I, int exponent, Integer modulo) {
     }
     return result;
 }
-Integer modPowerI(Integer I, Integer exponent, Integer modulo) {
+Integer modPowerI(Integer I, Integer exponent, Integer &modulo) {
     Integer result = 1, p = Integer(I) % modulo;
     while (exponent > 0) {
         if (exponent.isOdd()) {

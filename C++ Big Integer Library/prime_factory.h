@@ -59,20 +59,10 @@ bool isPrime(Integer I) {
             return false;
         }
     }
-    if (FermatWitness(2, I)) {
-        return false;
-    } else if (FermatWitness(3, I)) {
-        return false;
-    } else if (FermatWitness(5, I)) {
-        return false;
-    } else if (FermatWitness(7, I)) {
-        return false;
-    } else if (FermatWitness(11, I)) {
-        return false;
-    } else if (FermatWitness(13, I)) {
-        return false;
-    } else if (FermatWitness(17, I)) {
-        return false;
+    for (int i = 0; i < baseSize; i ++) {
+        if (FermatWitness(basePrimes[i], I)) {
+            return false;
+        }
     }
     Random rng(0xabc);
     for (int i = 0; i < EXTRA_FERMAT_TRIALS; i ++) {
@@ -83,4 +73,14 @@ bool isPrime(Integer I) {
     }
     return true;
 }
-
+Integer generatePrime(Integer low_bound = (1 << 10)) { // to slow
+    Random rng(0xabc);
+    Integer result = -1;
+    while (result == -1) {
+        result = rng.generateI(low_bound, low_bound << 3);
+        if (!isPrime(result)) {
+            result = -1;
+        }
+    }
+    return result;
+}
