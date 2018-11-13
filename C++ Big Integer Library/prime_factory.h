@@ -14,14 +14,20 @@
 
 using namespace std;
 
-// TODO
-
-// to implement:
-// https://en.wikipedia.org/wiki/Baillie-PSW_primality_test
-
 const int LIMIT = 1 << 7;
-const int FERMAT_TRIALS = 50;
+const int EXTRA_FERMAT_TRIALS = 2;
 
+const int basePrimes[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47};
+const int baseSize = 15;
+
+int _log(int length) {
+    int l = 0;
+    while (length) {
+        ++l;
+        length >>= 1;
+    }
+    return l;
+}
 bool FermatWitness(int base, Integer I) { // base-2 strong primality test
     Integer N = I - 1;
     int s = 0;
@@ -46,16 +52,31 @@ bool isPrime(Integer I) {
     if (I < 2) {
         return false;
     }
-    for (int i = 2; i < LIMIT; i ++) {
-        if (I == i) {
+    for (int i = 0; i < baseSize; i ++) {
+        if (I == basePrimes[i]) {
             return true;
-        } else if (I % i == 0) {
+        } else if (I % basePrimes[i] == 0) {
             return false;
         }
     }
+    if (FermatWitness(2, I)) {
+        return false;
+    } else if (FermatWitness(3, I)) {
+        return false;
+    } else if (FermatWitness(5, I)) {
+        return false;
+    } else if (FermatWitness(7, I)) {
+        return false;
+    } else if (FermatWitness(11, I)) {
+        return false;
+    } else if (FermatWitness(13, I)) {
+        return false;
+    } else if (FermatWitness(17, I)) {
+        return false;
+    }
     Random rng(0xabc);
-    for (int i = 0; i < FERMAT_TRIALS; i ++) {
-        int base = rng.generate(2, 0xfff);
+    for (int i = 0; i < EXTRA_FERMAT_TRIALS; i ++) {
+        int base = rng.generate(19, 0xfff);
         if (FermatWitness(base, I)) {
             return false;
         }
