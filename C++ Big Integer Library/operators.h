@@ -112,7 +112,7 @@ string defaultMultiplier(string &a, string &b) {
     return to_string(1LL * aValue * bValue);
 }
 string karatsuba(string &a, string &b) {
-    if ((int)a.size() < 4 && (int)b.size() < 4) { // if small string lengths achieved, use integer multiplication
+    if ((int)a.size() < 10 && (int)b.size() < 10) { // if small string lengths achieved, use integer multiplication
         return defaultMultiplier(a, b);
     }
     //    if (isZero(a) || isZero(b)) {
