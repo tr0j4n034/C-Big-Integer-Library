@@ -100,6 +100,9 @@ public:
             sign *= -1;
         }
     }
+    void setLastDigit(int digit) {
+        value.back() = (char)(digit + '0');
+    }
     bool operator == (Integer arg) {
         return (sign == arg.getSign() || isZero()) && value == arg.getValue();
     }
