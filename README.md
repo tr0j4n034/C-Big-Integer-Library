@@ -13,15 +13,15 @@ Extra:
 - Bitwise operations: and/or/xor/not/...
 - Binary shifts
 - Math functions:
-    min/max operators
-    square root calculation in O(N^(1 + 1.58)) using binary search (other faster methods can be used here)
-    cube root calculation
-    large factorials, checking if a number is a factorial of some nonnegative integer
+    1) min/max operators
+    2) square root calculation in O(N^(1 + 1.58)) using binary search (other faster methods can be used here)
+    3) cube root calculation
+    4) large factorials, checking if a number is a factorial of some nonnegative integer
 - Generation of random integers in particular range and length
 - Primes
-    primality check
-    Fermat witness method for pseudoprime numbers
-    generation of random numbers in particular range
+    1) primality check
+    2) Fermat witness method for pseudoprime numbers
+    3) generation of random numbers in particular range
     
 
 
