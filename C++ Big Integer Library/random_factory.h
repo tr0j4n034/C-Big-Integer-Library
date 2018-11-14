@@ -66,4 +66,18 @@ public:
     Integer generateI(Integer low, Integer high) {
         return low + generateIUpTo(high - low + 1);
     }
+    Integer generateLikelyPrimeI(Integer low, Integer high) { // change later, may be out of bounds
+        Integer I = low + generateIUpTo(high - low + 1);
+        int lastDigit = generate(0, 3);
+        if (lastDigit == 0) {
+            I.setLastDigit(1);
+        } else if (lastDigit == 1) {
+            I.setLastDigit(3);
+        } else if (lastDigit == 2) {
+            I.setLastDigit(7);
+        } else {
+            I.setLastDigit(9);
+        }
+        return I;
+    }
 };
