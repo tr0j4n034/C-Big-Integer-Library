@@ -16,6 +16,13 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
+    
+//    clock_t t = clock();
+//    cout << powFastI(2, int(2639)) << endl;
+//    clock_t t2 = clock();
+//    cout << 1. * (t2 - t) / CLOCKS_PER_SEC << endl;
+//    return 0;
+    
     Random r(5);
     cout << r.generate(1, 10) << endl;
     cout << generatePrime() << endl;
