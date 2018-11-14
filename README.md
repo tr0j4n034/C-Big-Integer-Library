@@ -18,7 +18,6 @@ Extra:
     cube root calculation
     large factorials, checking if a number is a factorial of some nonnegative integer
 - Generation of random integers in particular range and length
-
 - Primes
     primality check
     Fermat witness method for pseudoprime numbers
