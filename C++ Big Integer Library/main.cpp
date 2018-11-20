@@ -17,18 +17,25 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     
+    Integer ff = Integer("83012452418357729491");
+    Integer ss = Integer("10000000207");
+    Integer r = ff % ss;
+    cout << r << endl;
+    cout << r.getSign() << " " << r.getValue() << endl;
+    return 0;
+    
 //    clock_t t = clock();
 //    cout << powFastI(2, int(2639)) << endl;
 //    clock_t t2 = clock();
 //    cout << 1. * (t2 - t) / CLOCKS_PER_SEC << endl;
 //    return 0;
     
-    Random r(5);
-    cout << r.generate(1, 10) << endl;
-    cout << generatePrime() << endl;
+    //Random r(5);
+    //cout << r.generate(1, 10) << endl;
+    //cout << generatePrime() << endl;
     
-    for (int i = 2; i < 50; i ++) {
-        int a;
+    for (int i = 1; i < 50; i ++) {
+        long long a;
         cin >> a;
         cout << isPrime(a) << endl;
     }
