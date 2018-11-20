@@ -22,6 +22,9 @@ Extra:
     1) primality check
     2) Fermat witness method for pseudoprime numbers
     3) generation of random numbers in particular range
+    4) generation of random primes in particular range:
+        i) generation of 100-bit random primes in ~1.5 seconds on average
+        ii) generation of 200-bit random primes in ~4 seconds on average 
     
 
 
