@@ -79,6 +79,7 @@ bool isPrime(Integer I) {
     }
     clock_t t3 = clock();
     cout << "elapsed_3: " << double(t3 - t2) / CLOCKS_PER_SEC << endl;
+    cout << "total: " << double(t3 - t0) / CLOCKS_PER_SEC << endl;
     return true;
 }
 Integer generatePrime(Integer low_bound = (1 << 10)) { // to slow

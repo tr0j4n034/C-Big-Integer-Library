@@ -18,7 +18,8 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     Random r(5);
     cout << r.generate(1, 10) << endl;
-    Integer lowBound = powFastI(10, 100);
+    Integer lowBound = powFastI(2, 100);
+    
     cout << generatePrime(lowBound) << endl;
     
     return 0;
