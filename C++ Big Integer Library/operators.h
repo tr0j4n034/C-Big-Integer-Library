@@ -189,6 +189,11 @@ string _modulo(string a, string b) {
             result += (char)(wheel + '0');
         }
     }
+    reverse(current.begin(), current.end());
+    while ((int)current.size() > 1 && current.back() == '0') {
+        current.pop_back();
+    }
+    reverse(current.begin(), current.end());
     return current;
 }
 string moduloFast(string a, int b) {
@@ -212,10 +217,9 @@ string divide(string a, string b) {
     }
 }
 string modulo(string a, string b) {
-    int bValue = stoi(b);
-    if (bValue <= SHORT_INT_RANGE) {
-        return moduloFast(a, bValue);
-    } else {
+    if ((int)b.size() > 9) {
         return _modulo(a, b);
+    } else {
+        return moduloFast(a, stoi(b));
     }
 }

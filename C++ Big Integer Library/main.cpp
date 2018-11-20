@@ -22,7 +22,6 @@ int main(int argc, const char * argv[]) {
     Integer r = ff % ss;
     cout << r << endl;
     cout << r.getSign() << " " << r.getValue() << endl;
-    return 0;
     
 //    clock_t t = clock();
 //    cout << powFastI(2, int(2639)) << endl;
