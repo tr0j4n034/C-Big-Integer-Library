@@ -377,7 +377,6 @@ string toBinary(Integer I) {
     string bin = "";
     Integer absolute = I.abs();
     while (absolute > 0) {
-        cout << absolute << endl;
         bin += (absolute.isOdd() ? '1' : '0');
         absolute >>= 1;
     }

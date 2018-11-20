@@ -29,11 +29,14 @@ int _log(int length) {
     return l;
 }
 bool FermatWitness(int base, int s, Integer d, Integer I) { // base-2 strong primality test
-    if (modPowerI(base, d, I) == 1) {
+    Integer current = modPowerI(base, d, I);
+    cout << "base = " << base << ",d = " << d << ", i = " << I << endl;
+    cout << "current = " << current << endl;
+    if (current == 1) {
         return false;
     }
-    cout << "s = " << s << ", d = " << d << endl;
-    Integer current = powFastI(base, d);
+    cout << "base = " << base << ", s = " << s << ", d = " << d << endl;
+    
     for (int i = 0; i < s; i ++) {
         if (current % I == (I - 1)) {
             return false;
@@ -51,6 +54,7 @@ bool isPrime(Integer I) {
         if (I == basePrimes[i]) {
             return true;
         } else if (I % basePrimes[i] == 0) {
+            cout << "found here" << endl;
             return false;
         }
     }
@@ -65,6 +69,7 @@ bool isPrime(Integer I) {
     cout << "elapsed_1: " << double(t1 - t0) / CLOCKS_PER_SEC << endl;
     for (int i = 0; i < baseSize; i ++) {
         if (FermatWitness(basePrimes[i], s, d, I)) {
+            cout << "found here2" << endl;
             return false;
         }
     }
