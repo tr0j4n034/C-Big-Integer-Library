@@ -175,3 +175,19 @@ Integer* factorialTable(int number) {
     }
     return table;
 }
+int digitalRoot(Integer &I) {
+    int sum = 0;
+    for (auto ch: I.getValue()) {
+        sum += ch - '0';
+    }
+    while (sum > 9) {
+        sum = 0;
+        int current = 0;
+        while (sum > 0) {
+            current += sum % 10;
+            sum /= 10;
+        }
+        sum = current;
+    }
+    return sum;
+}

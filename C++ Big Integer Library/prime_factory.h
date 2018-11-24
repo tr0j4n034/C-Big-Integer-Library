@@ -16,6 +16,8 @@ using namespace std;
 
 const int LIMIT = 1 << 7;
 const int EXTRA_FERMAT_TRIALS = 2;
+const int EULER_TRIALS = 1 << 1; // will be increased (currently limited to small bits)
+const int MAX_EULER_BASE = 1 << 30;
 
 const int basePrimes[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47};
 const int baseSize = 15;
@@ -41,11 +43,10 @@ bool FermatWitness(int base, int s, Integer d, Integer I) { // base-2 strong pri
     }
     return true;
 }
-bool isPrime(Integer I) {
+bool smallPrimesCheck(Integer I) { // I < 53^2
     if (I < 2) {
         return false;
     }
-    clock_t t0 = clock();
     for (int i = 0; i < baseSize; i ++) {
         if (I == basePrimes[i]) {
             return true;
@@ -53,7 +54,12 @@ bool isPrime(Integer I) {
             return false;
         }
     }
-    clock_t t1 = clock();
+    return true;
+}
+bool isFermatPrime(Integer I, int __extra_trials = EXTRA_FERMAT_TRIALS) {
+    if (!smallPrimesCheck(I)) {
+        return false;
+    }
     Integer N = I - 1;
     int s = 0;
     while (N.isEven()) {
@@ -61,33 +67,104 @@ bool isPrime(Integer I) {
         s += 1;
     }
     Integer d = N;
-    cout << "elapsed_1: " << double(t1 - t0) / CLOCKS_PER_SEC << endl;
     for (int i = 0; i < baseSize; i ++) {
         if (FermatWitness(basePrimes[i], s, d, I)) {
             return false;
         }
     }
-    clock_t t2 = clock();
-    cout << "elapsed_2: " << double(t2 - t1) / CLOCKS_PER_SEC << endl;
-    
     Random rng(0xabc);
-    for (int i = 0; i < EXTRA_FERMAT_TRIALS; i ++) {
+    for (int i = 0; i < __extra_trials; i ++) {
         int base = rng.generate(19, 0xfff);
         if (FermatWitness(base, s, d, I)) {
             return false;
         }
     }
-    clock_t t3 = clock();
-    cout << "elapsed_3: " << double(t3 - t2) / CLOCKS_PER_SEC << endl;
-    cout << "total: " << double(t3 - t0) / CLOCKS_PER_SEC << endl;
     return true;
 }
-Integer generatePrime(Integer low_bound = (1 << 10)) { // to slow
+bool isCompositeByFermatTest(Integer I) {
+    return !isFermatPrime(I);
+}
+Integer generateFermatPrime(Integer low_bound = (1 << 10)) {
     Random rng(0xabc);
     Integer result = -1;
     while (result == -1) {
         result = rng.generateLikelyPrimeI(low_bound, low_bound << 3);
-        if (!isPrime(result)) {
+        if (!isFermatPrime(result)) {
+            result = -1;
+        }
+    }
+    return result;
+}
+bool isEulerPrime(Integer I, int __trials = EULER_TRIALS) {
+    if (!smallPrimesCheck(I)) {
+        return false;
+    }
+    Random rng(0xabc);
+    Integer exponent = Integer(I - 1) >> 1;
+    for (int i = 0; i < __trials; i ++) {
+        Integer base = rng.generateIUpTo(MAX_EULER_BASE);
+        if (I % base == 0) {
+            continue;
+        }
+        Integer halfPower = modPowerI(base, exponent, I);
+        if (halfPower != -1 && halfPower != +1) {
+            return false;
+        }
+    }
+    return true;
+}
+bool isCompositeByEulerTest(Integer I) {
+    return !isEulerPrime(I);
+}
+Integer generateEulerPrime(Integer low_bound = (1 << 10)) { // slow
+    Random rng(0xabc);
+    Integer result = -1;
+    while (result == -1) {
+        result = rng.generateLikelyPrimeI(low_bound, low_bound << 3);
+        if (!isEulerPrime(result)) {
+            result = -1;
+        }
+    }
+    return result;
+}
+bool isMillerRabinPrime(Integer I, int __trials = EULER_TRIALS, int __base_limit = MAX_EULER_BASE) {
+    if (!smallPrimesCheck(I)) {
+        return false;
+    }
+    int k = 0;
+    Integer M = I - 1;
+    while (M.isEven()) {
+        k ++;
+        M >>= 1;
+    }
+    Random rng(0xabc);
+    Integer exponent = Integer(I - 1) >> 1;
+    for (int i = 0; i < __trials; i ++) {
+        Integer base = rng.generateI(3, Integer(__base_limit) < I ? __base_limit: I - 1);
+        Integer b0 = modPowerI(base, M, I);
+        Integer b1 = 0;
+        for (int j = 0; j <= k; j ++) {
+            b1 = b0 * b0 % I;
+            if (b1 == 1) {
+                break;
+            }
+            b0 = b1;
+        }
+        if (b1 != 1 || (b0 != 1 && b0 != I - 1)) {
+            return false;
+        }
+    }
+    return true;
+}
+bool isCompositeByMillerRabinTest(Integer I) {
+    return !isMillerRabinPrime(I);
+}
+Integer generateMillerRabinPrime(Integer low_bound = (1 << 10)) { // slow
+    Random rng(0xabc);
+    Integer result = -1;
+    while (result == -1) {
+        result = rng.generateLikelyPrimeI(low_bound, low_bound << 3);
+        if (!isMillerRabinPrime(result)) {
             result = -1;
         }
     }

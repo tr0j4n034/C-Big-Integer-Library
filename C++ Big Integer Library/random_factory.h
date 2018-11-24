@@ -16,6 +16,7 @@
 #include <random>
 
 const int DEFAULT_INTEGER_LENGTH = 20;
+const int PRIME_LIKELIHOOD_TRIALS = 10;
 
 class Random {
 private:
@@ -68,15 +69,20 @@ public:
     }
     Integer generateLikelyPrimeI(Integer low, Integer high) { // change later, may be out of bounds
         Integer I = low + generateIUpTo(high - low + 1);
-        int lastDigit = generate(0, 3);
-        if (lastDigit == 0) {
-            I.setLastDigit(1);
-        } else if (lastDigit == 1) {
-            I.setLastDigit(3);
-        } else if (lastDigit == 2) {
-            I.setLastDigit(7);
-        } else {
-            I.setLastDigit(9);
+        for (int trials = 0; trials < PRIME_LIKELIHOOD_TRIALS; trials ++) {
+            int lastDigit = generate(0, 3);
+            if (lastDigit == 0) {
+                I.setLastDigit(1);
+            } else if (lastDigit == 1) {
+                I.setLastDigit(3);
+            } else if (lastDigit == 2) {
+                I.setLastDigit(7);
+            } else {
+                I.setLastDigit(9);
+            }
+            if (digitalRoot(I) % 3 != 0) {
+                return I;
+            }
         }
         return I;
     }
