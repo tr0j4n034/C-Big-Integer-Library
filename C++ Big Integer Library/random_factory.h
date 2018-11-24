@@ -15,8 +15,8 @@
 #include <ctime>
 #include <random>
 
-const int DEFAULT_INTEGER_LENGTH = 20;
-const int PRIME_LIKELIHOOD_TRIALS = 10;
+const int DEFAULT_INTEGER_LENGTH = 1 << 4;
+const int PRIME_LIKELIHOOD_TRIALS = 1 << 5;
 
 class Random {
 private:
