@@ -82,6 +82,21 @@ bool isFermatPrime(Integer I, int __extra_trials = EXTRA_FERMAT_TRIALS) {
     }
     return true;
 }
+bool isFermatPrime(Integer I, int* baseList) {
+    Integer N = I - 1;
+    int s = 0;
+    while (N.isEven()) {
+        N >>= 1;
+        s += 1;
+    }
+    Integer d = N;
+    for (int i = 0; i < (int)(sizeof(baseList)) / (int)sizeof(baseList[0]); i ++) {
+        if (FermatWitness(baseList[i], s, d, I)) {
+            return false;
+        }
+    }
+    return true;
+}
 bool isCompositeByFermatTest(Integer I) {
     return !isFermatPrime(I);
 }
@@ -104,6 +119,26 @@ bool isEulerPrime(Integer I, int __trials = EULER_TRIALS) {
     Integer exponent = Integer(I - 1) >> 1;
     for (int i = 0; i < __trials; i ++) {
         Integer base = rng.generateIUpTo(MAX_EULER_BASE);
+        if (I % base == 0) {
+            continue;
+        }
+        Integer halfPower = modPowerI(base, exponent, I);
+        if (halfPower != -1 && halfPower != +1) {
+            return false;
+        }
+    }
+    return true;
+}
+bool isEulerPrime(Integer I, int* baseList) {
+    Integer N = I - 1;
+    int s = 0;
+    while (N.isEven()) {
+        N >>= 1;
+        s += 1;
+    }
+    Integer exponent = Integer(I - 1) >> 1;
+    for (int i = 0; i < (int)(sizeof(baseList)) / (int)sizeof(baseList[0]); i ++) {
+        Integer base = baseList[i];
         if (I % base == 0) {
             continue;
         }
@@ -142,6 +177,31 @@ bool isMillerRabinPrime(Integer I, int __trials = MILLER_RABIN_TRIALS, int __bas
     Integer exponent = Integer(I - 1) >> 1;
     for (int i = 0; i < __trials; i ++) {
         Integer base = rng.generateI(3, Integer(__base_limit) < I ? __base_limit: I - 1);
+        Integer b0 = modPowerI(base, M, I);
+        Integer b1 = 0;
+        for (int j = 0; j <= k; j ++) {
+            b1 = b0 * b0 % I;
+            if (b1 == 1) {
+                break;
+            }
+            b0 = b1;
+        }
+        if (b1 != 1 || (b0 != 1 && b0 != I - 1)) {
+            return false;
+        }
+    }
+    return true;
+}
+bool isMillerRabinPrime(Integer I, int* baseList) {
+    int k = 0;
+    Integer M = I - 1;
+    while (M.isEven()) {
+        k ++;
+        M >>= 1;
+    }
+    Integer exponent = Integer(I - 1) >> 1;
+    for (int i = 0; i < (int)sizeof(baseList) / (int)sizeof(baseList[0]); i ++) {
+        Integer base = baseList[i];
         Integer b0 = modPowerI(base, M, I);
         Integer b1 = 0;
         for (int j = 0; j <= k; j ++) {
