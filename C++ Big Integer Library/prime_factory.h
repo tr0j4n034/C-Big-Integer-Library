@@ -16,8 +16,9 @@ using namespace std;
 
 const int LIMIT = 1 << 7;
 const int EXTRA_FERMAT_TRIALS = 2;
-const int EULER_TRIALS = 1 << 1; // will be increased (currently limited to small bits)
+const int EULER_TRIALS = 1 << 3; // slow
 const int MAX_EULER_BASE = 1 << 30;
+const int MILLER_RABIN_TRIALS = 10;
 
 const int basePrimes[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47};
 const int baseSize = 15;
@@ -127,7 +128,7 @@ Integer generateEulerPrime(Integer low_bound = (1 << 10)) { // slow
     }
     return result;
 }
-bool isMillerRabinPrime(Integer I, int __trials = EULER_TRIALS, int __base_limit = MAX_EULER_BASE) {
+bool isMillerRabinPrime(Integer I, int __trials = MILLER_RABIN_TRIALS, int __base_limit = MAX_EULER_BASE) {
     if (!smallPrimesCheck(I)) {
         return false;
     }
