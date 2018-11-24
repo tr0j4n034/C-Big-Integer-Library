@@ -20,11 +20,15 @@ Extra:
 - Generation of random integers in particular range and length
 - Primes
     1) primality check
-    2) Fermat witness method for pseudoprime numbers
+    2) prime generation by using Fermat witness trials
+    3) prime generation by using Euler's method
+    4) prime generation by using Miller-Rabin primality test
     3) generation of random numbers in particular range
     4) generation of random primes in particular range:
-        i) generation of 100-bit random primes in ~1.5 seconds on average
-        ii) generation of 200-bit random primes in ~4 seconds on average 
+        1) generation of 100-bit random primes using Fermat trials in ~1.5 seconds on average
+        2) generation of 200-bit random primes using Fermat trials in ~4 seconds on average
+        3) generation of 100-bit random primes using Miller-Rabin test in ~0.7 seconds on average
+        4) generation of 200-bit random primes using Miller-Rabin test in ~1.5 seconds on average
     
 
 
