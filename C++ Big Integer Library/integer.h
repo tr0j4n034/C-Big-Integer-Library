@@ -348,7 +348,18 @@ public:
     void operator ^= (Integer operand) {
         *this = *this ^ operand;
     }
-    
+    int getLowestSetBit() {
+        int bit = 0;
+        Integer I = abs();
+        while (I > 0) {
+            if (I.isOdd()) {
+                break;
+            }
+            I >>= 1;
+            bit ++;
+        }
+        return bit;
+    }
     bool isZero() {
         return (!value.empty() && value[0] == '0') || sign == 0;
     }
