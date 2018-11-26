@@ -231,3 +231,24 @@ Integer generateMillerRabinPrime(Integer low_bound = (1 << 10)) { // slow
     }
     return result;
 }
+Integer nextPrimeviaFermat(Integer I) {
+    I += 1;
+    while (!isFermatPrime(I)) {
+        ++I;
+    }
+    return I;
+}
+Integer nextPrimeviaEuler(Integer I) {
+    I += 1;
+    while (!isEulerPrime(I)) {
+        ++I;
+    }
+    return I;
+}
+Integer nextPrimeviaMillerRabin(Integer I) {
+    I += 1;
+    while (!isMillerRabinPrime(I)) {
+        ++I;
+    }
+    return I;
+}
