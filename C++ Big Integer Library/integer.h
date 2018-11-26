@@ -185,7 +185,7 @@ public:
         int __sign = sign;
         if (isZero()) {
             result = subtrahend.getValue();
-            sign = -subtrahend.getSign();
+            __sign = -subtrahend.getSign();
         } else if (subtrahend.isZero()) {
             result = value;
         } else if (sign == subtrahend.getSign()) {
@@ -210,7 +210,7 @@ public:
             return Integer("0");
         } else {
             string result = multiply(value, multiplier.getValue());
-            return Integer(result, (multiplier.getSign() ? +1 : -1));
+            return Integer(result, (sign == multiplier.getSign() ? +1 : -1));
         }
     }
     void operator *= (Integer multiplier) {
@@ -224,20 +224,18 @@ public:
         } else {
             return Integer(divide(value, divisor.getValue()), (sign == divisor.getSign() ? +1 : -1));
         }
-        return *this;
     }
     void operator /= (Integer divisor) {
         *this = *this / divisor;
     }
-    Integer operator % (Integer divisor) {
-        if (divisor.isZero()) {
+    Integer operator % (Integer dividend) {
+        if (dividend.isZero()) {
             throw runtime_error("Division by zero");
         } else if (isZero()) {
             return Integer("0");
         } else {
-            return Integer(modulo(value, divisor.getValue()), (sign == divisor.getSign() ? +1 : -1));
+            return Integer(modulo(value, dividend.getValue()), (sign == dividend.getSign() ? +1 : -1));
         }
-        return *this;
     }
     void operator %= (Integer divisor) {
         *this = *this % divisor;
