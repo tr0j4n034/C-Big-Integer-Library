@@ -126,7 +126,7 @@ Integer cbrtI(Integer I) {
 Integer gcdI(Integer a, Integer b) {
     Integer posA = a.abs();
     Integer posB = b.abs();
-    while (posA > 0) {
+    while (posB > 0) {
         posA %= posB;
         if (posA == 0) {
             return posB;
@@ -137,6 +137,27 @@ Integer gcdI(Integer a, Integer b) {
 }
 Integer lcmI(Integer a, Integer b) {
     return Integer(a / gcdI(a, b) * b);
+}
+Integer modularInverse(Integer a, Integer modulo) {
+    if (gcdI(a, modulo) != 1) {
+        return -1; // no modular inverse exists
+    } else if (modulo == 1) {
+        return 1;
+    } else {
+        Integer __mod = modulo, t, q;
+        Integer __x = 0, x = 1;
+        while (a > 1) {
+            q = a / modulo;
+            t = modulo;
+            modulo = a % modulo;
+            a = t;
+            t = __x;
+            __x = x - q * __x;
+            x = t;
+        }
+        if (x < 0) x += __mod;
+        return x;
+    }
 }
 Integer factorialI(int number) {
     if (number < 0) {
