@@ -16,15 +16,8 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    Integer a = 3;
-    Integer b = 17;
-    
-//    cout << b / a << endl;
-//    Integer c = Integer("0") - b / a;
-//    cout << c << endl;
-    cout << modularInverse(a, b) << endl;
-    Integer cc = modularInverse(a, b);
-    cout << cc << endl;
+    Integer a = Integer("10") << 5;
+    cout << a << endl;
     
     return 0;
 }

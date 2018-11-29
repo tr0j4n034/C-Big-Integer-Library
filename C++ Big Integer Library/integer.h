@@ -358,6 +358,20 @@ public:
         }
         return bit;
     }
+    bool isKthBitSet(int k) {
+        Integer v = abs();
+        while (k --) {
+            v >>= 1;
+        }
+        return v.isOdd();
+    }
+    Integer setKthBit(int k) {
+        if (isKthBitSet(k)) {
+            return Integer(*this);
+        } else {
+            return Integer(*this + (Integer("2") << k));
+        }
+    }
     bool isZero() {
         return (!value.empty() && value[0] == '0') || sign == 0;
     }
