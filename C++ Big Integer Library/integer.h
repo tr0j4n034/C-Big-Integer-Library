@@ -373,7 +373,7 @@ public:
             return Integer(*this + (Integer("2") << k));
         }
     }
-    vector<char> toBitArray() { // still for positive
+    vector<char> toBitVector() { // for positive integers so far
         vector<char> bits;
         Integer v = value;
         while (v > 0) {
@@ -382,6 +382,16 @@ public:
         }
         reverse(bits.begin(), bits.end());
         return bits;
+    }
+    string toBitString() {
+        string bitString = "";
+        Integer v = value;
+        while (v > 0) {
+            bitString += (char)(v.isOdd() + '0');
+            v >>= 1;
+        }
+        reverse(bitString.begin(), bitString.end());
+        return bitString;
     }
     bool isZero() {
         return (!value.empty() && value[0] == '0') || sign == 0;
