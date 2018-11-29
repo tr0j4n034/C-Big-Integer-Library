@@ -13,6 +13,7 @@
 #endif /* Number_h */
 
 #include <cstring>
+#include <vector>
 #include <algorithm>
 #include <type_traits>
 
@@ -371,6 +372,16 @@ public:
         } else {
             return Integer(*this + (Integer("2") << k));
         }
+    }
+    vector<char> toBitArray() { // still for positive
+        vector<char> bits;
+        Integer v = value;
+        while (v > 0) {
+            bits.push_back((char)(v.isOdd() + '0'));
+            v >>= 1;
+        }
+        reverse(bits.begin(), bits.end());
+        return bits;
     }
     bool isZero() {
         return (!value.empty() && value[0] == '0') || sign == 0;
