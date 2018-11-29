@@ -17,9 +17,10 @@ Extra:
     2) square root calculation in O(N^(1 + 1.58)) using binary search (other faster methods can be used here)
     3) cube root calculation
     4) large factorials, checking if a number is a factorial of some nonnegative integer
+    5) GCD, LCM, modular inverse, and some other number theory methods
 - Generation of random integers in particular range and length
 - Primes
-    1) primality check
+    1) primality check using Fermat, Euler, Miller-Rabin tests
     2) prime generation by using Fermat witness trials
     3) prime generation by using Euler's method
     4) prime generation by using Miller-Rabin primality test
