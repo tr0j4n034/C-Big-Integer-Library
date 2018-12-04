@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <cstring>
 #include <vector>
 
 #include "integer.h"
@@ -19,11 +20,13 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     Integer a = Integer(31);
     cout << a << endl;
-    vector<char> v = a.toBitArray();
+    vector<char> v = a.toBitVector();
     for (char i: v) {
         cout << i;
     }
     cout << endl;
+    string s = a.toBitString();
+    cout << s << endl;
     
     return 0;
 }
