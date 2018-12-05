@@ -12,16 +12,16 @@
 
 #endif /* extra_integer_factory_h */
 
-Integer absI(Integer I) {
+Integer absI(Integer I) { // absolute value of the integer
     return Integer(I.getValue(), I.getSign() == -1 ? 1 : I.getSign());
 }
-Integer min(Integer a, Integer b) {
+Integer min(Integer a, Integer b) { // minimum of two integers
     return a < b ? a : b;
 }
-Integer max(Integer a, Integer b) {
+Integer max(Integer a, Integer b) { // max of two integers
     return a > b ? a : b;
 }
-Integer powI(Integer I, int exponent) {
+Integer powI(Integer I, int exponent) { // naive power method
     Integer result = I;
     while (exponent > 1) {
         result = result * I;
@@ -29,7 +29,7 @@ Integer powI(Integer I, int exponent) {
     }
     return result;
 }
-Integer powFastI(Integer I, Integer exponent) {
+Integer powFastI(Integer I, Integer exponent) { // iterative fast power method
     Integer result = 1, p = Integer(I);
     while (exponent > 0) {
         if (exponent.isOdd()) {
@@ -40,7 +40,7 @@ Integer powFastI(Integer I, Integer exponent) {
     }
     return result;
 }
-Integer powFastI(Integer I, int exponent) {
+Integer powFastI(Integer I, int exponent) { // iterative fast power method
     Integer result = 1, p = Integer(I);
     while (exponent > 0) {
         if (exponent & 1) {
@@ -51,11 +51,10 @@ Integer powFastI(Integer I, int exponent) {
     }
     return result;
 }
-Integer powFast(int i, int exponent) {
+Integer powFast(int i, int exponent) { // iterative fast power method
     return powFastI(Integer(i), exponent);
 }
-
-Integer modPowerI(Integer I, int exponent, Integer &modulo) {
+Integer modPowerI(Integer I, int exponent, Integer &modulo) { // iterative fast modulo power
     Integer result = 1, p = Integer(I) % modulo;
     while (exponent > 0) {
         if (exponent & 1) {
@@ -66,7 +65,7 @@ Integer modPowerI(Integer I, int exponent, Integer &modulo) {
     }
     return result;
 }
-Integer modPowerI(Integer I, Integer exponent, Integer &modulo) {
+Integer modPowerI(Integer I, Integer exponent, Integer &modulo) { // iterative fast modulo power
     Integer result = 1, p = Integer(I) % modulo;
     while (exponent > 0) {
         if (exponent.isOdd()) {
@@ -77,7 +76,7 @@ Integer modPowerI(Integer I, Integer exponent, Integer &modulo) {
     }
     return result;
 }
-Integer sqrtI(Integer I) {
+Integer sqrtI(Integer I) { // square root of the integer
     if (I < 0) {
         // may be changed to silent warning
         throw runtime_error("negative number fed into sqrt function");
@@ -100,7 +99,7 @@ Integer sqrtI(Integer I) {
     }
     return best_approximation;
 }
-Integer cbrtI(Integer I) {
+Integer cbrtI(Integer I) { // cubre root of the integer
     if (I < 0) {
         // may be changed to silent warning
         throw runtime_error("negative number fed into sqrt function");
@@ -123,7 +122,7 @@ Integer cbrtI(Integer I) {
     }
     return best_approximation;
 }
-Integer gcdI(Integer a, Integer b) {
+Integer gcdI(Integer a, Integer b) { // greatest common divisor of two integers
     Integer posA = a.abs();
     Integer posB = b.abs();
     while (posB > 0) {
@@ -135,10 +134,10 @@ Integer gcdI(Integer a, Integer b) {
     }
     return posA;
 }
-Integer lcmI(Integer a, Integer b) {
+Integer lcmI(Integer a, Integer b) { // least common multiple of two integers
     return Integer(a / gcdI(a, b) * b);
 }
-Integer modularInverse(Integer a, Integer modulo) {
+Integer modularInverse(Integer a, Integer modulo) { // modular inverse
     if (gcdI(a, modulo) != 1) {
         return -1; // no modular inverse exists
     } else if (modulo == 1) {
@@ -159,7 +158,7 @@ Integer modularInverse(Integer a, Integer modulo) {
         return x;
     }
 }
-Integer factorialI(int number) {
+Integer factorialI(int number) { // factorial of the integer
     if (number < 0) {
         return 0;
     }
@@ -169,7 +168,7 @@ Integer factorialI(int number) {
     }
     return result;
 }
-int isFactorialI(Integer I) {
+int isFactorialI(Integer I) { // checking if the number is factorial
     if (I < 1) {
         return -1;
     } else {
@@ -184,7 +183,7 @@ int isFactorialI(Integer I) {
     // The early bird catches the worm.
     return -1;
 }
-Integer* factorialTable(int number) {
+Integer* factorialTable(int number) { // generating factorial table
     if (number < 0 || number > (1 << 16)) {
         // change if needed
         throw runtime_error("not valid for computation");
@@ -196,7 +195,7 @@ Integer* factorialTable(int number) {
     }
     return table;
 }
-int digitalRoot(Integer &I) {
+int digitalRoot(Integer &I) { // digital root of the integer
     int sum = 0;
     for (auto ch: I.getValue()) {
         sum += ch - '0';
