@@ -83,34 +83,34 @@ public:
     int getSign() { // sign of the integer
         return sign;
     }
-    string getValue() {
+    string getValue() { // value part of the integer (without sign)
         return value;
     }
-    int length() {
+    int length() { // length of the value part in decimal
         return (int)value.size();
     }
-    int digitAt(int position) {
+    int digitAt(int position) { // digit at specific position
         if (position < this->length()) {
             return value[position] - '0';
         } else {
             return -1;
         }
     }
-    void negate() {
+    void negate() { // negate the integer
         if (!this->isZero()) {
             sign *= -1;
         }
     }
-    void setLastDigit(int digit) {
+    void setLastDigit(int digit) { // modify last digit
         value.back() = (char)(digit + '0');
     }
-    bool operator == (Integer arg) {
+    bool operator == (Integer arg) { // equal operator
         return (sign == arg.getSign() || isZero()) && value == arg.getValue();
     }
-    bool operator != (Integer arg) {
+    bool operator != (Integer arg) { // not equal operator
         return !(*this == arg);
     }
-    bool operator < (Integer arg) {
+    bool operator < (Integer arg) { // less than operator
         if (sign != arg.getSign()) {
             return sign < arg.getSign();
         }
@@ -128,16 +128,16 @@ public:
         }
         return false;
     }
-    bool operator <= (Integer arg) {
+    bool operator <= (Integer arg) { // less or equal operator
         return *this == arg || *this < arg;
     }
-    bool operator > (Integer arg) {
+    bool operator > (Integer arg) { // greater operator
         return !(*this <= arg);
     }
-    bool operator >= (Integer arg) {
+    bool operator >= (Integer arg) { // greater or equal operator
         return !(*this < arg);
     }
-    void operator = (Integer arg) {
+    void operator = (Integer arg) { // set to new value
         sign = arg.getSign();
         value = arg.getValue();
     }
@@ -154,13 +154,13 @@ public:
             value = to_string(arg);
         }
     }
-    Integer operator -() {
+    Integer operator -() { // getting negative of the integer
         return Integer(value, sign == -1 ? +1 : sign);
     }
-    Integer abs() {
+    Integer abs() { // absolute value
         return Integer(value, sign == -1 ? 1 : sign);
     }
-    Integer operator + (Integer addend) {
+    Integer operator + (Integer addend) { // addition of two integers
         string result = "0";
         int __sign = sign;
         if (isZero()) {
@@ -178,10 +178,10 @@ public:
         }
         return Integer(result, result[0] == '0' ? 0 : __sign);
     }
-    void operator += (Integer addend) {
+    void operator += (Integer addend) { // addition operator
         *this = *this + addend;
     }
-    Integer operator - (Integer subtrahend) {
+    Integer operator - (Integer subtrahend) { // subtraction of two integers
         string result = "0";
         int __sign = sign;
         if (isZero()) {
@@ -203,10 +203,10 @@ public:
         }
         return Integer(result, result[0] == '0' ? 0 : __sign);
     }
-    void operator -= (Integer subtrahend) {
+    void operator -= (Integer subtrahend) { // subtraction operator
         *this = *this - subtrahend;
     }
-    Integer operator * (Integer multiplier) {
+    Integer operator * (Integer multiplier) { // multiplication of two integers
         if (this->isZero() || multiplier.isZero()) {
             return Integer("0");
         } else {
@@ -214,10 +214,10 @@ public:
             return Integer(result, (sign == multiplier.getSign() ? +1 : -1));
         }
     }
-    void operator *= (Integer multiplier) {
+    void operator *= (Integer multiplier) { // multiplication operator
         *this = *this * multiplier;
     }
-    Integer operator / (Integer divisor) {
+    Integer operator / (Integer divisor) { // integer division of two integers
         if (divisor.isZero()) {
             throw runtime_error("Division by zero");
         } else if (isZero()) {
@@ -226,10 +226,10 @@ public:
             return Integer(divide(value, divisor.getValue()), (sign == divisor.getSign() ? +1 : -1));
         }
     }
-    void operator /= (Integer divisor) {
+    void operator /= (Integer divisor) { // integer division operator
         *this = *this / divisor;
     }
-    Integer operator % (Integer dividend) {
+    Integer operator % (Integer dividend) { // modulo of two integers
         if (dividend.isZero()) {
             throw runtime_error("Division by zero");
         } else if (isZero()) {
@@ -238,14 +238,14 @@ public:
             return Integer(modulo(value, dividend.getValue()), (sign == dividend.getSign() ? +1 : -1));
         }
     }
-    void operator %= (Integer divisor) {
-        *this = *this % divisor;
+    void operator %= (Integer dividend) { // modulo operator
+        *this = *this % dividend;
     }
-    Integer& operator ++ () {
+    Integer& operator ++ () { // preincrement operator
         *this += 1;
         return *this;
     }
-    Integer operator ++ (int) {
+    Integer operator ++ (int) { // postincrement operator
         Integer result = Integer(*this);
         ++ (*this);
         return result;
@@ -259,7 +259,7 @@ public:
         -- (*this);
         return result;
     }
-    Integer operator >> (int shift) {
+    Integer operator >> (int shift) { // right shift
         Integer I = abs();
         bool negative = (sign == -1);
         while (shift) {
@@ -271,10 +271,10 @@ public:
         }
         return I;
     }
-    void operator >>= (int shift) {
+    void operator >>= (int shift) { // right shift operator
         *this = *this >> shift;
     }
-    Integer operator << (int shift) {
+    Integer operator << (int shift) { // left shift
         Integer I = *this;
         while (shift > 0) {
             I = I + I;
@@ -282,7 +282,7 @@ public:
         }
         return I;
     }
-    void operator <<= (int shift) {
+    void operator <<= (int shift) { // left shift operator
         if (isNegative()) {
             // maybe changed to a silent warning
             throw runtime_error("shifting negative number.");
@@ -293,10 +293,10 @@ public:
     // BITWISE operators section
     // Please, modify if negative numbers will be used in these operations
     
-    Integer operator !() {
+    Integer operator !() { // NOT operator
         return Integer(isZero() ? 1 : 0);
     }
-    Integer operator & (Integer operand) {
+    Integer operator & (Integer operand) { // AND of two integers
         Integer a = Integer(*this);
         Integer b = Integer(operand);
         Integer result = 0, power = 1;
@@ -310,10 +310,10 @@ public:
         }
         return result;
     }
-    void operator &= (Integer operand) {
+    void operator &= (Integer operand) { // AND operator
         *this = *this & operand;
     }
-    Integer operator | (Integer operand) {
+    Integer operator | (Integer operand) { // OR of two integers
         Integer a = Integer(*this);
         Integer b = Integer(operand);
         Integer result = 0, power = 1;
@@ -327,10 +327,10 @@ public:
         }
         return result;
     }
-    void operator |= (Integer operand) {
+    void operator |= (Integer operand) { // OR operator
         *this = *this | operand;
     }
-    Integer operator ^ (Integer operand) {
+    Integer operator ^ (Integer operand) { // XOR of two integers
         Integer a = Integer(*this);
         Integer b = Integer(operand);
         Integer result = 0, power = 1;
@@ -344,10 +344,10 @@ public:
         }
         return result;
     }
-    void operator ^= (Integer operand) {
+    void operator ^= (Integer operand) { // XOR operator
         *this = *this ^ operand;
     }
-    int getLowestSetBit() {
+    int getLowestSetBit() { // getting lowest setbit (=1)
         int bit = 0;
         Integer I = abs();
         while (I > 0) {
@@ -359,14 +359,14 @@ public:
         }
         return bit;
     }
-    bool isKthBitSet(int k) {
+    bool isKthBitSet(int k) { // checking if k-th bit is set (=1)
         Integer v = abs();
         while (k --) {
             v >>= 1;
         }
         return v.isOdd();
     }
-    int setBitCount() {
+    int setBitCount() { // counting the set (=1) bits
         int ones = 0;
         Integer v = abs();
         while (v > 0) {
@@ -377,7 +377,7 @@ public:
         }
         return ones;
     }
-    Integer setKthBit(int k) {
+    Integer setKthBit(int k) { // setting k-th bit to 1
         if (isKthBitSet(k)) {
             return Integer(*this);
         } else {
@@ -394,7 +394,7 @@ public:
         reverse(bits.begin(), bits.end());
         return bits;
     }
-    string toBitString() {
+    string toBitString() { // converting to binary bit string
         string bitString = "";
         Integer v = value;
         while (v > 0) {
@@ -404,22 +404,22 @@ public:
         reverse(bitString.begin(), bitString.end());
         return bitString;
     }
-    bool isZero() {
+    bool isZero() { // checking equality to zero
         return (!value.empty() && value[0] == '0') || sign == 0;
     }
-    bool isPositive() {
+    bool isPositive() { // checking positiveness
         return sign == +1;
     }
-    bool isNegative() {
+    bool isNegative() { // checking negativeness
         return sign == -1;
     }
-    bool isEven() {
+    bool isEven() { // checking evenness
         return !value.empty() && (!((int)value.back() & 1));
     }
-    bool isOdd() {
+    bool isOdd() { // checking oddness
         return !value.empty() && ((int)value.back() & 1);
     }
-    int decimalValueLength() {
+    int decimalValueLength() { // length in decimal notation
         return (int)value.size();
     }
 };
@@ -428,20 +428,7 @@ std::ostream &operator << (std::ostream &os, Integer i) {
     return os << i.toString();
 }
 
-string toBinary(Integer I) {
-    string bin = "";
-    Integer absolute = I.abs();
-    while (absolute > 0) {
-        bin += (absolute.isOdd() ? '1' : '0');
-        absolute >>= 1;
-    }
-    if (I.isNegative()) {
-        // handle negative numbers if needed
-    }
-    reverse(bin.begin(), bin.end());
-    return bin;
-}
-Integer binaryToInteger(string binary) {
+Integer binaryToInteger(string binary) { // binary to integer converter
     Integer result = 0;
     Integer power = 1;
     for (int i = (int)binary.size() - 1; i >= 0; i --) {
