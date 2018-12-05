@@ -18,7 +18,7 @@
 
 using namespace std;
 
-string add(string a, string b) { // addition of two numbers in linear time
+string add(string a, string b) { // addition of two strings(numbers) in linear time
     string sum = "";
     int i = (int)a.size() - 1;
     int j = (int)b.size() - 1;
@@ -46,7 +46,7 @@ string add(string a, string b) { // addition of two numbers in linear time
     reverse(sum.begin(), sum.end());
     return sum;
 }
-string subtract(string a, string b) { // assuming a >= b, subtraction in linear time
+string subtract(string a, string b) { // subtraction of two numbers(strings) in linear time
     string difference = "";
     int i = (int)a.size() - 1;
     int j = (int)b.size() - 1;
@@ -72,7 +72,7 @@ string subtract(string a, string b) { // assuming a >= b, subtraction in linear 
     reverse(difference.begin(), difference.end());
     return difference;
 }
-void split(string &a, string &l, string &r) {
+void split(string &a, string &l, string &r) { // split the number two 2 equal parts
     int length = (int)a.size();
     int half = length >> 1;
     l = a.substr(0, half);
@@ -106,12 +106,12 @@ void normalize(string &a, string &b) { // making the lengths equal to 2's power
     }
     
 }
-string defaultMultiplier(string &a, string &b) {
+string defaultMultiplier(string &a, string &b) { // builtin multiplication
     int aValue = stoi(a);
     int bValue = stoi(b);
     return to_string(1LL * aValue * bValue);
 }
-string karatsuba(string &a, string &b) {
+string karatsuba(string &a, string &b) { // karatsuba multiplication of two numbers in O(n^1.58)
     if ((int)a.size() < 10 && (int)b.size() < 10) { // if small string lengths achieved, use integer multiplication
         return defaultMultiplier(a, b);
     }
@@ -135,13 +135,13 @@ string karatsuba(string &a, string &b) {
     string sum24 = add(p2, p4);
     return add(p1, sum24);
 }
-string multiply(string a, string b) {
+string multiply(string a, string b) { // multiplication utility function
     //    considering that this code assumes only positive numbers,
     //    you can handle negative numbers as well (even big decimals).
     //    Why not change to FFT?
     return karatsuba(a, b);
 }
-string _divide(string a, string b) {
+string _divide(string a, string b) { // division of two integers(strings)
     string result = "";
     string current = "";
     for (char ch: a) {
@@ -160,7 +160,7 @@ string _divide(string a, string b) {
     }
     return result;
 }
-string divideFast(string a, int b) {
+string divideFast(string a, int b) { // faster division of two integers
     string result = "";
     int current = 0;
     for (char ch: a) {
@@ -175,7 +175,7 @@ string divideFast(string a, int b) {
     }
     return result;
 }
-string _modulo(string a, string b) {
+string _modulo(string a, string b) { // modulo operation of two integers(strings)
     string result = "";
     string current = "";
     for (char ch: a) {
@@ -196,7 +196,7 @@ string _modulo(string a, string b) {
     reverse(current.begin(), current.end());
     return current;
 }
-string moduloFast(string a, int b) {
+string moduloFast(string a, int b) { // faster modulo function
     string result = "";
     int current = 0;
     for (char ch: a) {
@@ -208,7 +208,7 @@ string moduloFast(string a, int b) {
     }
     return to_string(current);
 }
-string divide(string a, string b) {
+string divide(string a, string b) { // helper for division of two integers
     int bValue = stoi(b);
     if (bValue <= SHORT_INT_RANGE) {
         return divideFast(a, bValue);
@@ -216,7 +216,7 @@ string divide(string a, string b) {
         return _divide(a, b);
     }
 }
-string modulo(string a, string b) {
+string modulo(string a, string b) { // modulo of two integers(strings)
     if ((int)b.size() > 9) {
         return _modulo(a, b);
     } else {

@@ -23,7 +23,7 @@ const int MILLER_RABIN_TRIALS = 10;
 const int basePrimes[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47};
 const int baseSize = 15;
 
-int _log(int length) {
+int _log(int length) { // helper log
     int l = 0;
     while (length) {
         ++l;
