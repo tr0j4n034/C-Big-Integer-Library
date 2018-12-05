@@ -73,14 +73,14 @@ public:
     ~Integer() {
         // TODO
     }
-    string toString(){
+    string toString(){ // string converter
         if (this -> isZero()) {
             return "0";
         } else {
             return (sign == +1 ? "" : "-") + value;
         }
     }
-    int getSign() {
+    int getSign() { // sign of the integer
         return sign;
     }
     string getValue() {
@@ -365,6 +365,17 @@ public:
             v >>= 1;
         }
         return v.isOdd();
+    }
+    int setBitCount() {
+        int ones = 0;
+        Integer v = abs();
+        while (v > 0) {
+            if (v.isOdd()) {
+                ones ++;
+            }
+            v >>= 1;
+        }
+        return ones;
     }
     Integer setKthBit(int k) {
         if (isKthBitSet(k)) {
