@@ -73,6 +73,9 @@ public:
     ~Integer() {
         // TODO
     }
+    void operator = (int arg) {
+        value = to_string(arg);
+    }
     string toString(){ // string converter
         if (this -> isZero()) {
             return "0";
@@ -107,8 +110,14 @@ public:
     bool operator == (Integer arg) { // equal operator
         return (sign == arg.getSign() || isZero()) && value == arg.getValue();
     }
+    bool operator == (int arg) { // equal operator for int
+        return *this == Integer(arg);
+    }
     bool operator != (Integer arg) { // not equal operator
         return !(*this == arg);
+    }
+    bool operator != (int arg) { // not equal operator for int
+        return *this != Integer(arg);
     }
     bool operator < (Integer arg) { // less than operator
         if (sign != arg.getSign()) {
@@ -128,14 +137,26 @@ public:
         }
         return false;
     }
+    bool operator < (int arg) { // lass than operator for int
+        return *this < Integer(arg);
+    }
     bool operator <= (Integer arg) { // less or equal operator
         return *this == arg || *this < arg;
+    }
+    bool operator <= (int arg) { // less or equal operator for int
+        return *this <= Integer(arg);
     }
     bool operator > (Integer arg) { // greater operator
         return !(*this <= arg);
     }
+    bool operator > (int arg) { // greator operator for int
+        return *this > Integer(arg);
+    }
     bool operator >= (Integer arg) { // greater or equal operator
         return !(*this < arg);
+    }
+    bool operator >= (int arg) { // greator or equal operator for int
+        return *this >= Integer(arg);
     }
     void operator = (Integer arg) { // set to new value
         sign = arg.getSign();
@@ -153,6 +174,13 @@ public:
             sign = +1;
             value = to_string(arg);
         }
+    }
+    operator int(){
+        int v = 0;
+        for (char digit: value) {
+            v = (v << 3) + (v << 1) + digit - '0';
+        }
+        return v * sign;
     }
     Integer operator -() { // getting negative of the integer
         return Integer(value, sign == -1 ? +1 : sign);
@@ -178,8 +206,14 @@ public:
         }
         return Integer(result, result[0] == '0' ? 0 : __sign);
     }
+    Integer operator + (int addend) { // addition of two integers
+        return *this + Integer(addend);
+    }
     void operator += (Integer addend) { // addition operator
         *this = *this + addend;
+    }
+    void operator += (int addend) { // addition operator
+        *this = *this + Integer(addend);
     }
     Integer operator - (Integer subtrahend) { // subtraction of two integers
         string result = "0";
@@ -203,8 +237,14 @@ public:
         }
         return Integer(result, result[0] == '0' ? 0 : __sign);
     }
+    Integer operator - (int subtrahend) { // subtraction of two integers
+        return *this - Integer(subtrahend);
+    }
     void operator -= (Integer subtrahend) { // subtraction operator
         *this = *this - subtrahend;
+    }
+    void operator -= (int subtrahend) { // subtraction operator
+        *this = *this - Integer(subtrahend);
     }
     Integer operator * (Integer multiplier) { // multiplication of two integers
         if (this->isZero() || multiplier.isZero()) {
@@ -214,8 +254,14 @@ public:
             return Integer(result, (sign == multiplier.getSign() ? +1 : -1));
         }
     }
+    Integer operator * (int multiplier) { // multiplication of two integers
+        return *this * Integer(multiplier);
+    }
     void operator *= (Integer multiplier) { // multiplication operator
         *this = *this * multiplier;
+    }
+    void operator *= (int multiplier) { // multiplication operator
+        *this = *this * Integer(multiplier);
     }
     Integer operator / (Integer divisor) { // integer division of two integers
         if (divisor.isZero()) {
@@ -226,8 +272,14 @@ public:
             return Integer(divide(value, divisor.getValue()), (sign == divisor.getSign() ? +1 : -1));
         }
     }
+    Integer operator / (int divisor) {
+        return *this / Integer(divisor);
+    }
     void operator /= (Integer divisor) { // integer division operator
         *this = *this / divisor;
+    }
+    void operator /= (int divisor) { // integer division operator
+        *this = *this / Integer(divisor);
     }
     Integer operator % (Integer dividend) { // modulo of two integers
         if (dividend.isZero()) {
@@ -238,8 +290,14 @@ public:
             return Integer(modulo(value, dividend.getValue()), (sign == dividend.getSign() ? +1 : -1));
         }
     }
+    Integer operator % (int dividend) { // modulo of two integers
+        return *this % Integer(dividend);
+    }
     void operator %= (Integer dividend) { // modulo operator
         *this = *this % dividend;
+    }
+    void operator %= (int dividend) { // modulo operator
+        *this = *this % Integer(dividend);
     }
     Integer& operator ++ () { // preincrement operator
         *this += 1;
@@ -417,6 +475,17 @@ public:
         }
         reverse(bitString.begin(), bitString.end());
         return bitString;
+    }
+    string toHexString() {
+        string hexString = "";
+        Integer v = value;
+        while (v > 0) {
+            int digit = int(v % 16);
+            hexString += (char)(digit < 10 ? digit + '0' : digit + 'A' - 10);
+            v >>= 4;
+        }
+        reverse(hexString.begin(), hexString.end());
+        return hexString;
     }
     bool isZero() { // checking equality to zero
         return (!value.empty() && value[0] == '0') || sign == 0;

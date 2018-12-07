@@ -176,7 +176,7 @@ bool isMillerRabinPrime(Integer I, int __trials = MILLER_RABIN_TRIALS, int __bas
     Random rng(0xabc);
     Integer exponent = Integer(I - 1) >> 1;
     for (int i = 0; i < __trials; i ++) {
-        Integer base = rng.generateI(3, Integer(__base_limit) < I ? __base_limit: I - 1);
+        Integer base = rng.generateI(3, min(Integer(__base_limit), I - 1));
         Integer b0 = modPowerI(base, M, I);
         Integer b1 = 0;
         for (int j = 0; j <= k; j ++) {
