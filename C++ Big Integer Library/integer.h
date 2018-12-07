@@ -384,6 +384,12 @@ public:
             return Integer(*this + (Integer("2") << k));
         }
     }
+    void setKthbit(int k) { // setting k-th bit to 1
+        if (!isKthBitSet(k)) {
+            Integer addend = Integer("1") << k;
+            *this += addend;
+        }
+    }
     vector<char> toBitVector() { // for positive integers so far
         vector<char> bits;
         Integer v = value;
