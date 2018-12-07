@@ -391,6 +391,13 @@ public:
             return Integer(*this - (Integer("1") << k));
         }
     }
+    Integer flipKthBit(int k) {
+        if (isKthBitSet(k)) {
+            return Integer(*this - (Integer("1") << k));
+        } else {
+            return Integer(*this + (Integer("1") << k));
+        }
+    }
     vector<char> toBitVector() { // for positive integers so far
         vector<char> bits;
         Integer v = value;
