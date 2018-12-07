@@ -381,13 +381,14 @@ public:
         if (isKthBitSet(k)) {
             return Integer(*this);
         } else {
-            return Integer(*this + (Integer("2") << k));
+            return Integer(*this + (Integer("1") << k));
         }
     }
-    void setKthbit(int k) { // setting k-th bit to 1
+    Integer clearKthBit(int k) {
         if (!isKthBitSet(k)) {
-            Integer addend = Integer("1") << k;
-            *this += addend;
+            return Integer(*this);
+        } else {
+            return Integer(*this - (Integer("1") << k));
         }
     }
     vector<char> toBitVector() { // for positive integers so far
