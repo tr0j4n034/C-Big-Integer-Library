@@ -76,6 +76,9 @@ public:
     void operator = (int arg) {
         value = to_string(arg);
     }
+    void operator = (long long arg) {
+        value = to_string(arg);
+    }
     string toString(){ // string converter
         if (this -> isZero()) {
             return "0";
@@ -177,7 +180,7 @@ public:
     }
     operator int(){ // to int converter
         int v = 0;
-        for (char digit: value) {
+        for (char &digit: value) {
             v = (v << 3) + (v << 1) + digit - '0';
         } // correct if the value fits into int range
         return v * sign;
