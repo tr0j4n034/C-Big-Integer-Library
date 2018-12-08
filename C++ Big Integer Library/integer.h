@@ -175,11 +175,11 @@ public:
             value = to_string(arg);
         }
     }
-    operator int(){
+    operator int(){ // to int converter
         int v = 0;
         for (char digit: value) {
             v = (v << 3) + (v << 1) + digit - '0';
-        }
+        } // correct if the value fits into int range
         return v * sign;
     }
     Integer operator -() { // getting negative of the integer
