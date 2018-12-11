@@ -87,11 +87,20 @@ public:
         }
         return I;
     }
-    Integer generateCoprime(Integer I, int trials = COPRIME_TRIALS) {
+    Integer generateCoprime(Integer modulo, int trials = COPRIME_TRIALS) {
         for (int i = 0; i < trials; i ++) {
-            Integer x = generateIUpTo(I - 1);
-            if (gcdI(x, I) == 1) {
-                return x;
+            Integer I = generateIUpTo(modulo - 1);
+            if (gcdI(I, modulo) == 1) {
+                return I;
+            }
+        }
+        return 1; // unlikely
+    }
+    Integer generateCoprime(Integer modulo, Integer moduloExt, int trials = COPRIME_TRIALS) {
+        for (int i = 0; i < trials; i ++) {
+            Integer I = generateIUpTo(modulo - 1);
+            if (gcdI(I, modulo) == 1 && gcdI(I, moduloExt) == 1) {
+                return I;
             }
         }
         return 1; // unlikely
