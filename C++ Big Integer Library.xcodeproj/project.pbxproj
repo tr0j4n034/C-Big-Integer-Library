@@ -31,6 +31,7 @@
 		51D361DB2186042000675F27 /* C++ Big Integer Library */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "C++ Big Integer Library"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51D361DE2186042000675F27 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		51D361E52186044700675F27 /* integer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = integer.h; sourceTree = "<group>"; };
+		51D96DEB21BF83AB009D46B8 /* rsa_mini.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rsa_mini.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +71,7 @@
 				510B0E09218CB7C200B83292 /* random_factory.h */,
 				5104C7C6218769BD006096CC /* string_factory.h */,
 				519371E721861CEF00F95058 /* operators.h */,
+				51D96DEB21BF83AB009D46B8 /* rsa_mini.h */,
 			);
 			path = "C++ Big Integer Library";
 			sourceTree = "<group>";
