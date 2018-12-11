@@ -34,10 +34,10 @@ public:
     int generate() {
         return dist(generator);
     }
-    int generate(int low, int high) {
+    int generate(int low, int high) { // generate int particular range
         return low + dist(generator) % (high - low + 1);
     }
-    Integer generateI(int length = DEFAULT_INTEGER_LENGTH) {
+    Integer generateI(int length = DEFAULT_INTEGER_LENGTH) { // generate int having specified length in decimal
         string digits = "";
         for (int i = 0; i < length; i ++) {
             int __d = generate();
@@ -49,7 +49,7 @@ public:
         }
         return Integer(digits, (generate() & 1) ? +1 : -1);
     }
-    Integer generateIUpTo(Integer top) {
+    Integer generateIUpTo(Integer top) { // generate integer upto specified integer (positive)
         string result = "";
         for (int i = 0; i < (int)top.getValue().size(); i ++) {
             int __d = generate(0, 9);
@@ -64,10 +64,10 @@ public:
         }
         return result;
     }
-    Integer generateI(Integer low, Integer high) {
+    Integer generateI(Integer low, Integer high) { // generate integer in specified range
         return low + generateIUpTo(high - low + 1);
     }
-    Integer generateLikelyPrimeI(Integer low, Integer high) { // change later, may be out of bounds
+    Integer generateLikelyPrimeI(Integer low, Integer high) { // generate likely prime in specified range
         Integer I = low + generateIUpTo(high - low + 1);
         for (int trials = 0; trials < PRIME_LIKELIHOOD_TRIALS; trials ++) {
             int lastDigit = generate(0, 3);
@@ -80,7 +80,7 @@ public:
             } else {
                 I.setLastDigit(9);
             }
-            if (digitalRoot(I) % 3 != 0) {
+            if (digitalRoot(I) % 3 != 0) { // eliminating composites
                 return I;
             }
         }
