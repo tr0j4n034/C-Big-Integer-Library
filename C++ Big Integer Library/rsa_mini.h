@@ -47,6 +47,8 @@ public:
         data += "Euler phi of N = " + phiN.toString() + "\n";
         data += "public key = " + publicKey.toString() + "\n";
         data += "private key = " + privateKey.toString() + "\n";
+        string validity = (isValid() ? "" : "not ");
+        data += "Scheme is " + validity + "valid.\n";
         return data;
     }
     void getinfo(std::ostream &os) {
