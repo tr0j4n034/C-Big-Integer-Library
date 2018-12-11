@@ -137,6 +137,9 @@ Integer gcdI(Integer a, Integer b) { // greatest common divisor of two integers
 Integer lcmI(Integer a, Integer b) { // least common multiple of two integers
     return Integer(a / gcdI(a, b) * b);
 }
+bool isCoprime(Integer a, Integer b) { // checking if two integers are coprime or not
+    return gcdI(a, b) == 1;
+}
 Integer modularInverse(Integer a, Integer modulo) { // modular inverse
     if (gcdI(a, modulo) != 1) {
         return -1; // no modular inverse exists
