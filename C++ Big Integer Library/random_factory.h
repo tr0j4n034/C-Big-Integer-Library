@@ -17,6 +17,7 @@
 
 const int DEFAULT_INTEGER_LENGTH = 1 << 4;
 const int PRIME_LIKELIHOOD_TRIALS = 1 << 5;
+const int COPRIME_TRIALS = 1 << 5;
 
 class Random {
 private:
@@ -85,5 +86,14 @@ public:
             }
         }
         return I;
+    }
+    Integer generateCoprime(Integer I, int trials = COPRIME_TRIALS) {
+        for (int i = 0; i < trials; i ++) {
+            Integer x = generateIUpTo(I - 1);
+            if (gcdI(x, I) == 1) {
+                return x;
+            }
+        }
+        return 1; // unlikely
     }
 };
