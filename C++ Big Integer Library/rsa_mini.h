@@ -75,4 +75,10 @@ public:
             && gcdI(publicKey, privateKey) == 1
             && publicKey * privateKey % phiN == 1;
     }
+    Integer encrypt(Integer message) {
+        return modPowerI(message, publicKey, N);
+    }
+    Integer decrypt(Integer cipher) {
+        return modPowerI(cipher, privateKey, N);
+    }
 };
