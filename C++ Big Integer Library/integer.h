@@ -445,14 +445,14 @@ public:
             return Integer(*this + (Integer("1") << k));
         }
     }
-    Integer clearKthBit(int k) {
+    Integer clearKthBit(int k) { // resetting k-th bit
         if (!isKthBitSet(k)) {
             return Integer(*this);
         } else {
             return Integer(*this - (Integer("1") << k));
         }
     }
-    Integer flipKthBit(int k) {
+    Integer flipKthBit(int k) { // flipping k-th bit
         if (isKthBitSet(k)) {
             return Integer(*this - (Integer("1") << k));
         } else {
@@ -479,7 +479,7 @@ public:
         reverse(bitString.begin(), bitString.end());
         return bitString;
     }
-    string toHexString() {
+    string toHexString() { // converting to hex string
         string hexString = "";
         Integer v = value;
         while (v > 0) {
