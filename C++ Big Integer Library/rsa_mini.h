@@ -39,6 +39,15 @@ public:
     Integer getPrivateKey() {
         return privateKey;
     }
+    Integer getPublicKey() {
+        return publicKey;
+    }
+    Integer* getPrimeFactors() {
+        Integer* factors = new Integer[2];
+        factors[0] = P;
+        factors[1] = Q;
+        return factors;
+    }
     string toString() {
         string data = "";
         data += "N = " + N.toString() + "\n";
@@ -80,5 +89,11 @@ public:
     }
     Integer decrypt(Integer cipher) {
         return modPowerI(cipher, privateKey, N);
+    }
+    Integer sign(Integer message) {
+        return modPowerI(message, privateKey, N);
+    }
+    bool verify(Integer original, Integer sent) {
+        return original == modPowerI(sent, publicKey, N);
     }
 };
