@@ -18,7 +18,7 @@ const int LIMIT = 1 << 7;
 const int EXTRA_FERMAT_TRIALS = 2;
 const int EULER_TRIALS = 1 << 3; // slow
 const int MAX_EULER_BASE = 1 << 30;
-const int MILLER_RABIN_TRIALS = 10;
+const int MILLER_RABIN_TRIALS = 100;
 
 const int basePrimes[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47};
 const int baseSize = 15;
@@ -101,7 +101,7 @@ bool isCompositeByFermatTest(Integer I) {
     return !isFermatPrime(I);
 }
 Integer generateFermatPrime(Integer low_bound = (1 << 10)) {
-    Random rng(0xabc);
+    Random rng((int)clock());
     Integer result = -1;
     while (result == -1) {
         result = rng.generateLikelyPrimeI(low_bound, low_bound << 3);
@@ -115,7 +115,7 @@ bool isEulerPrime(Integer I, int __trials = EULER_TRIALS) {
     if (!smallPrimesCheck(I)) {
         return false;
     }
-    Random rng(0xabc);
+    Random rng((int)clock());
     Integer exponent = Integer(I - 1) >> 1;
     for (int i = 0; i < __trials; i ++) {
         Integer base = rng.generateIUpTo(MAX_EULER_BASE);
@@ -153,7 +153,7 @@ bool isCompositeByEulerTest(Integer I) {
     return !isEulerPrime(I);
 }
 Integer generateEulerPrime(Integer low_bound = (1 << 10)) { // slow
-    Random rng(0xabc);
+    Random rng((int)clock());
     Integer result = -1;
     while (result == -1) {
         result = rng.generateLikelyPrimeI(low_bound, low_bound << 3);
@@ -220,8 +220,8 @@ bool isMillerRabinPrime(Integer I, int* baseList) {
 bool isCompositeByMillerRabinTest(Integer I) {
     return !isMillerRabinPrime(I);
 }
-Integer generateMillerRabinPrime(Integer low_bound = (1 << 10)) { // slow
-    Random rng(0xabc);
+Integer generateMillerRabinPrime(Integer low_bound = (1 << 10)) {
+    Random rng((int)clock());
     Integer result = -1;
     while (result == -1) {
         result = rng.generateLikelyPrimeI(low_bound, low_bound << 3);

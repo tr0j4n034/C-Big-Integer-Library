@@ -112,7 +112,7 @@ string defaultMultiplier(string &a, string &b) { // builtin multiplication
     return to_string(1LL * aValue * bValue);
 }
 string karatsuba(string &a, string &b) { // karatsuba multiplication of two numbers in O(n^1.58)
-    if ((int)a.size() < 10 && (int)b.size() < 10) { // if small string lengths achieved, use integer multiplication
+    if ((int)a.size() < 9 && (int)b.size() < 9) { // if small string lengths achieved, use integer multiplication
         return defaultMultiplier(a, b);
     }
     //    if (isZero(a) || isZero(b)) {
@@ -209,8 +209,8 @@ string moduloFast(string a, int b) { // faster modulo function
     return to_string(current);
 }
 string divide(string a, string b) { // helper for division of two integers
-    int bValue = stoi(b);
-    if (bValue <= SHORT_INT_RANGE) {
+    if ((int)b.size() < 5) {
+        int bValue = stoi(b);
         return divideFast(a, bValue);
     } else {
         return _divide(a, b);

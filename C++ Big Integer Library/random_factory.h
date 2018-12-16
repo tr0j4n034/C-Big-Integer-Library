@@ -14,6 +14,7 @@
 
 #include <ctime>
 #include <random>
+#include <cassert>
 
 const int DEFAULT_INTEGER_LENGTH = 1 << 4;
 const int PRIME_LIKELIHOOD_TRIALS = 1 << 5;
@@ -36,7 +37,7 @@ public:
         return dist(generator);
     }
     int generate(int low, int high) { // generate int particular range
-        return low + dist(generator) % (high - low + 1);
+        return low + 1ULL * dist(generator) % (high - low + 1);
     }
     Integer generateI(int length = DEFAULT_INTEGER_LENGTH) { // generate int having specified length in decimal
         string digits = "";
