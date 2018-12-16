@@ -17,8 +17,8 @@
 #include <cassert>
 
 const int DEFAULT_INTEGER_LENGTH = 1 << 4;
-const int PRIME_LIKELIHOOD_TRIALS = 1 << 5;
-const int COPRIME_TRIALS = 1 << 5;
+const int PRIME_LIKELIHOOD_TRIALS = 1 << 7;
+const int COPRIME_TRIALS = 1 << 7;
 
 class Random {
 private:

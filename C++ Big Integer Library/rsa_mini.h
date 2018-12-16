@@ -33,7 +33,7 @@ public:
         Q = q;
         N = P * Q;
         phiN = (p - 1) * (q - 1);
-        Random rng(0x12345);
+        Random rng((int)clock());
         publicKey = rng.generateCoprime(phiN, phiN);
         privateKey = modularInverse(publicKey, phiN);
     }
