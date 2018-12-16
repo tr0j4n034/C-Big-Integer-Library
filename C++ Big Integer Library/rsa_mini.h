@@ -15,6 +15,7 @@
 #include <cstring>
 
 const Integer MODULO_LOW_VALUE = powFastI(2, 100);
+const int BLOCK_SIZE = 64;
 
 class RSA {
     Integer P, Q; // ~prime
@@ -95,5 +96,43 @@ public:
     }
     bool verify(Integer original, Integer sent) {
         return original == modPowerI(sent, publicKey, N);
+    }
+    Integer encryptText(string message) {
+        while ((int)message.size() % BLOCK_SIZE) {
+            message = "0" + message;
+        }
+        Integer hash = 0;
+        Integer seperator = powFastI(10, 64);
+        for (int block = 0; block < (int)message.size(); block += BLOCK_SIZE) {
+            string binaryBlock = "";
+            for (int i = block; i < block + BLOCK_SIZE / 8; i ++) {
+                binaryBlock += Integer((int)message[i]).toBitString();
+            }
+            hash = hash * seperator + encrypt(binaryToInteger(binaryBlock));
+        }
+        return hash;
+    }
+    string decryptText(Integer cipher) {
+        string result = "";
+        Integer seperator = powFastI(10, 64);
+        vector<string> blocks;
+        while (cipher > 0) {
+            Integer part = cipher % seperator;
+            string originalMessage = decrypt(part).toBitString();
+            string current = "";
+            for (int i = 0; i < (int)originalMessage.size(); i += BLOCK_SIZE / 8) {
+                int letter = 0;
+                for (int j = i; j < i + BLOCK_SIZE / 8; j ++) {
+                    letter = (letter << 3) + (letter << 1) + originalMessage[i] - '0';
+                }
+                current += (char)(letter);
+            }
+            blocks.push_back(current);
+        }
+        reverse(blocks.begin(), blocks.end());
+        for (auto part: blocks) {
+            result += part;
+        }
+        return result;
     }
 };
