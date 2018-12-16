@@ -74,10 +74,12 @@ public:
         // TODO
     }
     void operator = (int arg) {
-        value = to_string(arg);
+        value = to_string(arg < 0 ? -arg : arg);
+        sign = (arg == 0 ? 0 : (arg > 0 ? 1 : -1));
     }
     void operator = (long long arg) {
-        value = to_string(arg);
+        value = to_string(arg < 0 ? -arg : arg);
+        sign = (arg == 0 ? 0 : (arg > 0 ? 1 : -1));
     }
     string toString(){ // string converter
         if (this -> isZero()) {
