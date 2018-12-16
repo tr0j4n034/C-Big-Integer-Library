@@ -204,7 +204,6 @@ int digitalRoot(Integer &I) { // digital root of the integer
         sum += ch - '0';
     }
     while (sum > 9) {
-        sum = 0;
         int current = 0;
         while (sum > 0) {
             current += sum % 10;
