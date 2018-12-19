@@ -9,24 +9,24 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
+#include <ctime>
 
 #include "integer.h"
 #include "extra_integer_factory.h"
 #include "random_factory.h"
 #include "prime_factory.h"
 
+#include "rsa_mini.h"
+
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    Integer a = Integer(31);
-    cout << a << endl;
-    vector<char> v = a.toBitVector();
-    for (char i: v) {
-        cout << i;
-    }
-    cout << endl;
-    string s = a.toBitString();
-    cout << s << endl;
+    Integer a = 96;
+    cout << isFermatPrime(a) << endl;
+    cout << smallPrimesCheck(a) << endl;
+    cout << isEulerPrime(a) << endl;
+    cout << isMillerRabinPrime(a) << endl;
+    
     
     return 0;
 }

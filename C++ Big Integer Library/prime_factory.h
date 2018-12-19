@@ -69,6 +69,9 @@ bool isFermatPrime(Integer I, int __extra_trials = EXTRA_FERMAT_TRIALS) {
     }
     Integer d = N;
     for (int i = 0; i < baseSize; i ++) {
+        if (I >= basePrimes[i]) {
+            break;
+        }
         if (FermatWitness(basePrimes[i], s, d, I)) {
             return false;
         }
@@ -119,6 +122,9 @@ bool isEulerPrime(Integer I, int __trials = EULER_TRIALS) {
     Integer exponent = Integer(I - 1) >> 1;
     for (int i = 0; i < __trials; i ++) {
         Integer base = rng.generateIUpTo(MAX_EULER_BASE);
+        if (base >= I) {
+            continue;
+        }
         if (I % base == 0) {
             continue;
         }
@@ -139,6 +145,9 @@ bool isEulerPrime(Integer I, int* baseList) {
     Integer exponent = Integer(I - 1) >> 1;
     for (int i = 0; i < (int)(sizeof(baseList)) / (int)sizeof(baseList[0]); i ++) {
         Integer base = baseList[i];
+        if (base >= I) {
+            continue;
+        }
         if (I % base == 0) {
             continue;
         }
@@ -177,6 +186,9 @@ bool isMillerRabinPrime(Integer I, int __trials = MILLER_RABIN_TRIALS, int __bas
     Integer exponent = Integer(I - 1) >> 1;
     for (int i = 0; i < __trials; i ++) {
         Integer base = rng.generateI(3, min(Integer(__base_limit), I - 1));
+        if (base >= I) {
+            continue;
+        }
         Integer b0 = modPowerI(base, M, I);
         Integer b1 = 0;
         for (int j = 0; j <= k; j ++) {
