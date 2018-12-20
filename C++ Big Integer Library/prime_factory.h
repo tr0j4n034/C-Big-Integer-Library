@@ -104,7 +104,7 @@ bool isCompositeByFermatTest(Integer I) {
     return !isFermatPrime(I);
 }
 Integer generateFermatPrime(Integer low_bound = (1 << 10)) {
-    Random rng((int)clock());
+    Random rng((int)clock() * (int)rand());
     Integer result = -1;
     while (result == -1) {
         result = rng.generateLikelyPrimeI(low_bound, low_bound << 3);
@@ -162,7 +162,7 @@ bool isCompositeByEulerTest(Integer I) {
     return !isEulerPrime(I);
 }
 Integer generateEulerPrime(Integer low_bound = (1 << 10)) { // slow
-    Random rng((int)clock());
+    Random rng((int)clock() * (int)rand());
     Integer result = -1;
     while (result == -1) {
         result = rng.generateLikelyPrimeI(low_bound, low_bound << 3);
@@ -233,7 +233,7 @@ bool isCompositeByMillerRabinTest(Integer I) {
     return !isMillerRabinPrime(I);
 }
 Integer generateMillerRabinPrime(Integer low_bound = (1 << 10)) {
-    Random rng((int)clock());
+    Random rng((int)clock() * (int)rand());
     Integer result = -1;
     while (result == -1) {
         result = rng.generateLikelyPrimeI(low_bound, low_bound << 3);
